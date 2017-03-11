@@ -1,0 +1,45 @@
+// SASS variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.css.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+@import "active_admin/flat_theme/mixins";
+@import "active_admin/flat_theme/base";
+
+// Overriding any non-variable SASS must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   .status_tag { background: #6090DB; }
+
+// Display buttons and search field side-by-side
+.action_items {
+  display: inline;
+}
+
+.table_tools {
+  // Display secondary navigation and scope tabs side-by-side
+  float: left;
+
+  // Show batch actions on the right
+  .batch_actions_selector {
+    float: right;
+  }
+
+  // Make sure scopes don't wrap below
+  .table_tools_segmented_control {
+    width: auto !important;
+    padding-right: $section-padding;
+  }
+}
+
+// Improve styles of <pre> elements in panels (used for displaying JSON)
+.panel_contents pre {
+  margin: 0;
+  background: #fff;
+  padding: 6px;
+}
