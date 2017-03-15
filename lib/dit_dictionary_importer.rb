@@ -21,7 +21,8 @@ class DitDictionaryImporter
         similar: [],
         counterpart: [],
         categories: [],
-        examples: [],
+        examples_tetun: [],
+        examples_english: [],
         cross_references: [],
         main_cross_references: [],
         origin: []
@@ -100,7 +101,7 @@ class DitDictionaryImporter
         when "Usage"
           gloss_node = nodes[index + 1]
           if gloss_node['class'] == 'lpGlossEnglish'
-            entry.usage = clean(node.text)
+            entry.usage = clean(gloss_node.text)
           else
             raise Disionariu::ParsingError,
               "`lpMiniHeading=Usage` is not associated to a `lpGlossEnglish`: #{ node }"
@@ -203,10 +204,8 @@ class DitDictionaryImporter
       when 'lpExample'
         gloss_node = nodes[index + 1]
         if gloss_node['class'] == 'lpGlossEnglish'
-          entry.examples << {
-            tetun: clean(node.text),
-            english: clean(gloss_node.text)
-          }
+          entry.examples_tetun << clean(node.text)
+          entry.examples_english << clean(gloss_node.text)
         else
           raise Disionariu::ParsingError,
             "The `lpExample` is not associated to a `lpGlossEnglish`: #{ node }"

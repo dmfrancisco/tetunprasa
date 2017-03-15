@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170311115237) do
+ActiveRecord::Schema.define(version: 20170314231229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -44,6 +45,28 @@ ActiveRecord::Schema.define(version: 20170311115237) do
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "entries", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "slug",                  null: false
+    t.string "name",                  null: false
+    t.string "glossary_english"
+    t.string "male_counterpart"
+    t.string "female_counterpart"
+    t.string "info"
+    t.string "part_of_speech"
+    t.string "usage"
+    t.string "origin",                             array: true
+    t.string "subentries",                         array: true
+    t.string "antonyms",                           array: true
+    t.string "synonyms",                           array: true
+    t.string "similar",                            array: true
+    t.string "counterpart",                        array: true
+    t.string "categories",                         array: true
+    t.string "examples_english",                   array: true
+    t.string "examples_tetun",                     array: true
+    t.string "cross_references",                   array: true
+    t.string "main_cross_references",              array: true
   end
 
 end
