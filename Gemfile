@@ -10,6 +10,8 @@ gem 'devise'
 gem 'nokogiri'
 gem 'friendly_id'
 gem 'pg'
+gem 'sunspot_rails'
+gem 'sunspot_solr' # optional pre-packaged Solr distribution for use in development
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
