@@ -21,8 +21,7 @@ class DitDictionaryImporter
         similar: [],
         counterpart: [],
         categories: [],
-        examples_tetun: [],
-        examples_english: [],
+        examples: {},
         cross_references: [],
         main_cross_references: [],
         origin: []
@@ -204,8 +203,7 @@ class DitDictionaryImporter
       when 'lpExample'
         gloss_node = nodes[index + 1]
         if gloss_node['class'] == 'lpGlossEnglish'
-          entry.examples_tetun << clean(node.text)
-          entry.examples_english << clean(gloss_node.text)
+          entry.examples[clean(node.text)] = clean(gloss_node.text)
         else
           raise Disionariu::ParsingError,
             "The `lpExample` is not associated to a `lpGlossEnglish`: #{ node }"

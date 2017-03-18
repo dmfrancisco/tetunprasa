@@ -14,7 +14,78 @@
  *= require_self
  */
 
+body {
+  background: #eee;
+}
+
+.Container {
+  max-width: 680px;
+  margin: 0.5rem auto;
+}
+
+.Search,
 .Entry {
-  border: 1px solid black;
-  padding: 10px;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.Search {
+  padding: 0.5rem;
+}
+
+.Entry {
+  border: 1px solid currentColor;
+
+  &-header {
+    background: white;
+    padding: 0.5rem;
+  }
+
+  &-body {
+    margin: 0.5rem;
+  }
+
+  &-related {
+    background: lightyellow;
+    color: #777;
+    padding: 0.5rem;
+  }
+
+  &-title,
+  &-subtitle,
+  &-glossary,
+  &-examples {
+    margin: 0 0 0.5rem;
+  }
+
+  &-name {
+    color: navy;
+    text-decoration: none;
+  }
+
+  &-subtitle {
+    color: black;
+  }
+
+  &-partOfSpeech {
+    font-weight: normal;
+  }
+
+  &-examples {
+    font-style: italic;
+    border-left: 2px solid lightgrey;
+    padding-left: 0.5rem;
+
+    &--tetun {
+      color: navy;
+    }
+    &--english {
+      color: grey;
+    }
+  }
+
+  &-subentries {
+    margin-left: 3em;
+  }
 }

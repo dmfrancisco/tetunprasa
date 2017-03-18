@@ -18,29 +18,20 @@ namespace :app do
           html_source = File.read(filename)
           entries = DitDictionaryImporter.new(html_source).parse
 
-          entries.map { |entry| [ entry, entry.subentries ] }.flatten.each do |entry|
-            Entry.create!({
-              subentries: entry.subentries.map(&:name),
-              name: entry.name,
-              glossary_english: entry.glossary_english,
-              male_counterpart: entry.male_counterpart,
-              female_counterpart: entry.female_counterpart,
-              info: entry.info,
-              part_of_speech: entry.part_of_speech,
-              usage: entry.usage,
-              origin: entry.origin,
-              antonyms: entry.antonyms,
-              synonyms: entry.synonyms,
-              similar: entry.similar,
-              counterpart: entry.counterpart,
-              categories: entry.categories,
-              examples_english: entry.examples_english,
-              examples_tetun: entry.examples_tetun,
-              cross_references: entry.cross_references,
-              main_cross_references: entry.main_cross_references
-            })
+          entries.each do |entry|
+            record = Entry.new entry.to_h.except(:subentries)
+            subentries = entry.subentries.map do |subentry|
+              Entry.new subentry.to_h.except(:subentries)
+            end
+
+            # Ignore known "---" fake subentries
+            record.subentries << subentries.reject { |e| e.name == '-' * 73 }
+            record.save!
           end
         end
+
+        # Update search index
+        Entry.reindex
       end
     end
   end

@@ -1,74 +1,77 @@
+<% nest = true unless local_assigns.has_key? :nest %>
+
 <div class="Entry">
-  <h2><%= entry.name %></h2>
+  <div class="Entry-header">
+    <h2 class="Entry-title">
+      <%= link_to entry.name, { search: entry.name }, class: "Entry-name" %>
 
-  <div>
-    <em>glossary_english: <%= entry.glossary_english %></em>
+      <small class="Entry-partOfSpeech">
+        <em><%= entry.part_of_speech %></em>
+      </small>
+    </h2>
+
+    <div class="Entry-glossary">
+      <% if entry.glossary_english.present? %>
+        <%= entry.glossary_english %>.
+      <% end %>
+
+      <% if entry.info.present? %>
+        <div><em><%= entry.info %>.</em></div>
+      <% end %>
+    </div>
+
+    <blockquote class="Entry-examples">
+      <% entry.examples.each do |tetun, english| %>
+        <div class="Entry-examples--tetun"><%= tetun %></div>
+        <div class="Entry-examples--english"><%= english %></div>
+      <% end %>
+    </blockquote>
   </div>
 
-  <% if entry.subentries.present? %>
-    <div>subentries: <%= entry.subentries %></div>
-  <% end %>
+  <div class="Entry-body">
+    <% if entry.categories.any? %>
+      <div>
+        <strong>Categories:</strong>
+        <%= entry.categories.join(", ") %>
+      </div>
+    <% end %>
 
-  <% if entry.main_cross_references.present? %>
-    <div>main_cross_references: <%= entry.main_cross_references.join(", ") %></div>
-  <% end %>
+    <% if entry.usage.present? %>
+      <div>
+        <strong>Usage:</strong>
+        <%= entry.usage %>
+      </div>
+    <% end %>
 
-  <% if entry.male_counterpart.present? %>
-    <div>male_counterpart: <%= entry.male_counterpart %></div>
-  <% end %>
-
-  <% if entry.female_counterpart.present? %>
-    <div>female_counterpart: <%= entry.female_counterpart %></div>
-  <% end %>
-
-  <% if entry.info.present? %>
-    <div>info: <%= entry.info %></div>
-  <% end %>
-
-  <% if entry.part_of_speech.present? %>
-    <div>part_of_speech: <%= entry.part_of_speech %></div>
-  <% end %>
-
-  <% if entry.usage.present? %>
-    <div>usage: <%= entry.usage %></div>
-  <% end %>
-
-  <% if entry.origin.any? %>
-    <div>origin: <%= entry.origin.join(", ") %></div>
-  <% end %>
-
-  <% if entry.antonyms.any? %>
-    <div>antonyms: <%= entry.antonyms.join(", ") %></div>
-  <% end %>
-
-  <% if entry.synonyms.any? %>
-    <div>synonyms: <%= entry.synonyms.join(", ") %></div>
-  <% end %>
-
-  <% if entry.similar.any? %>
-    <div>similar: <%= entry.similar.join(", ") %></div>
-  <% end %>
-
-  <% if entry.counterpart.any? %>
-    <div>counterpart: <%= entry.counterpart.join(", ") %></div>
-  <% end %>
-
-  <% if entry.categories.any? %>
-    <div>categories: <%= entry.categories.join(", ") %></div>
-  <% end %>
-
-  <% if entry.examples_english.any? %>
-    <div>examples: <%= entry.examples_tetun.join(", ") %></div>
-    <div>examples: <%= entry.examples_english.join(", ") %></div>
-  <% end %>
-
-  <% if entry.cross_references.any? %>
-    <div>cross_references: <%= entry.cross_references.join(", ") %></div>
-  <% end %>
-
-  <div>
-    <%= link_to 'Show', entry %>
-    <%= link_to 'Edit', edit_entry_path(entry) %>
-    <%= link_to 'Destroy', entry, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% if entry.origin.any? %>
+      <div>
+        <strong>From:</strong>
+        <%= entry.origin.to_sentence %>
+      </div>
+    <% end %>
   </div>
+
+  <%= render partial: "related_entries", locals: { entries: entry.main_cross_references, title: "Variant", nest: nest } %>
+
+  <%= render partial: "related_entries", locals: { entries: [entry.male_counterpart], title: "Male counterpart", nest: nest } %>
+
+  <%= render partial: "related_entries", locals: { entries: [entry.female_counterpart], title: "Female counterpart", nest: nest } %>
+
+  <%= render partial: "related_entries", locals: { entries: entry.counterpart, title: "Counterpart", nest: nest } %>
+
+  <%= render partial: "related_entries", locals: { entries: entry.synonyms, title: "Synonyms", nest: nest } %>
+
+  <%= render partial: "related_entries", locals: { entries: entry.antonyms, title: "Antonyms", nest: nest } %>
+
+  <%= render partial: "related_entries", locals: { entries: entry.similar, title: "Similar", nest: nest } %>
+
+  <%= render partial: "related_entries", locals: { entries: entry.cross_references, title: "See also", nest: nest } %>
+</div>
+
+<div class="Entry-subentries">
+  <% if entry.parent.nil? %>
+    <% entry.subentries.each do |entry| %>
+      <%= render partial: entry, locals: { nest: false } %>
+    <% end %>
+  <% end %>
 </div>

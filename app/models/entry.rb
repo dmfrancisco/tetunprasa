@@ -1,7 +1,17 @@
 class Entry < ApplicationRecord
   extend FriendlyId
 
+  belongs_to :parent, class_name: 'Entry', foreign_key: 'parent_id'
+  has_many :subentries, class_name: 'Entry', foreign_key: 'parent_id'
+
   friendly_id :slug_candidates, use: :slugged
+
+  searchable do
+    text :name
+    text :glossary_english
+    text :info
+    text :examples
+  end
 
   def slug_candidates
     [:name, :name_and_sequence]
