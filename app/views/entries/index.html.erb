@@ -8,7 +8,19 @@
 </div>
 
 <div class="Container">
-  <% @entries.each do |entry| %>
-    <%= render entry %>
-  <% end %>
+  <div class="Container-sekundariu">
+    <h2 class="Container-titulu">
+      Common phrases
+    </h2>
+  </div>
+
+  <div class="Container-prinsipal">
+    <h2 class="Container-titulu">
+      Definitions
+    </h2>
+
+    <% @entries.each do |entry| %>
+      <%= render entry %>
+    <% end %>
+  </div>
 </div>

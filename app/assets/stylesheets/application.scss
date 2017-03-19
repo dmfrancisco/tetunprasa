@@ -35,13 +35,16 @@ body {
 
   &-lafaek {
     background: $black url(lafaek.svg) no-repeat;
-    width: rem(65);
+    background-size: rem(65) rem(55);
+
+    width: rem($main-margin-left);
     height: rem($topbar-height);
     float: left;
   }
 
   &-buka {
-    background: url(buka.svg) no-repeat 16px center;
+    background: url(buka.svg) no-repeat rem(16) center;
+    background-size: rem(19) rem(18);
     float: left;
 
     &-input {
@@ -64,17 +67,53 @@ body {
 }
 
 .Container {
-  max-width: 680px;
-  margin: 0.5rem auto;
+  margin: rem($gutter);
+  margin-left: rem($main-margin-left);
+
+  &-titulu {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: rem(12);
+    color: $grey;
+    letter-spacing: rem(0.6);
+    margin-top: 0;
+    margin-bottom: rem(10);
+
+    @include no-user-select;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  &-prinsipal,
+  &-sekundariu {
+    float: left;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  &-sekundariu {
+    padding-bottom: rem($gutter);
+  }
+
+  // Improvements for bigger screens
+  @media (min-width: 601px) {
+    &-prinsipal {
+      width: 60%;
+    }
+
+    &-sekundariu {
+      float: right;
+      width: 40%;
+      padding-left: rem($gutter);
+      padding-bottom: 0;
+    }
+  }
 }
 
 .Entry {
   margin-bottom: 0.5rem;
   width: 100%;
   box-sizing: border-box;
-}
-
-.Entry {
   border: 1px solid currentColor;
 
   &-header {
@@ -128,4 +167,15 @@ body {
   &-subentries {
     margin-left: 3em;
   }
+}
+
+// Improvements for various screens
+@media (min-width: 801px) and (max-width: 1024px) {
+  html { font-size: 14px }
+}
+@media (min-width: 701px) and (max-width: 800px) {
+  html { font-size: 13px }
+}
+@media (max-width: 700px) {
+  html { font-size: 12px }
 }
