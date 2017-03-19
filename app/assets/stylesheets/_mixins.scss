@@ -13,3 +13,9 @@
   -moz-user-select: none;
   user-select: none;
 }
+
+// Make text a bit thinner in some browsers
+@mixin smooth-text {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
