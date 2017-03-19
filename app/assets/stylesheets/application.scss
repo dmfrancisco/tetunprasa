@@ -14,8 +14,53 @@
  *= require_self
  */
 
+@import "mixins";
+@import "variables";
+@import "utilities";
+
 body {
-  background: #eee;
+  $background-color: $light-grey;
+
+  background: $background-color;
+  font-family: $font-family-sans-serif;
+}
+
+.Topbar {
+  $topbar-color: $orange;
+  $topbar-height: 55;
+
+  background: $topbar-color;
+  height: rem($topbar-height);
+  box-shadow: 0 0 rem(10) rgba($black, 0.1);
+
+  &-lafaek {
+    background: $black url(lafaek.svg) no-repeat;
+    width: rem(65);
+    height: rem($topbar-height);
+    float: left;
+  }
+
+  &-buka {
+    background: url(buka.svg) no-repeat 16px center;
+    float: left;
+
+    &-input {
+      background: transparent;
+      border: none;
+      box-sizing: border-box;
+      font-size: rem(21);
+      font-family: $font-family-sans-serif;
+      height: rem($topbar-height - 2);
+      outline: none;
+      padding-left: rem($gutter/2);
+      margin-left: rem($gutter);
+      width: 100%;
+
+      &::placeholder {
+        color: $black;
+      }
+    }
+  }
 }
 
 .Container {
@@ -23,15 +68,10 @@ body {
   margin: 0.5rem auto;
 }
 
-.Search,
 .Entry {
   margin-bottom: 0.5rem;
   width: 100%;
   box-sizing: border-box;
-}
-
-.Search {
-  padding: 0.5rem;
 }
 
 .Entry {

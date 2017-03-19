@@ -1,0 +1,7 @@
+/* Convert pixels to rems. For eg. for a relational value of 12px write rem(12)
+ * Assumes $base is the font-size of <html>
+ * From http://bourbon.io */
+@function rem($pxval) {
+  $base: 16;
+  @return ($pxval / $base) * 1rem;
+}

@@ -1,7 +1,7 @@
 class EntriesController < ApplicationController
   def index
-    if params[:search].present?
-      @entries = Entry.solr_search { fulltext params[:search] }
+    if params[:buka].present?
+      @entries = Entry.solr_search { fulltext params[:buka] }
       @entries = @entries.results
     else
       @entries = Entry.none

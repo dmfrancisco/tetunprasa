@@ -1,8 +1,13 @@
-<div class="Container">
-  <%= form_tag entries_path, method: :get do %>
-    <%= text_field_tag :search, nil, placeholder: "Search", class: "Search", value: params[:search] %>
-  <% end %>
+<div class="Topbar">
+  <div class="Topbar-lafaek"></div>
 
+  <%= form_tag entries_path, method: :get, class: "Topbar-buka" do %>
+    <%= text_field_tag :buka, params[:buka], id: nil, class: "Topbar-buka-input",
+       placeholder: "Buka", autocapitalize: "off", autocorrect: "off", spellcheck: "false" %>
+  <% end %>
+</div>
+
+<div class="Container">
   <% @entries.each do |entry| %>
     <%= render entry %>
   <% end %>
