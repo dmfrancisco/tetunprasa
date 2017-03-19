@@ -137,61 +137,76 @@ body {
 }
 
 .Entry {
-  margin-bottom: 0.5rem;
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid currentColor;
+  $space: 15;
+  $small-space: 10;
 
-  &-header {
-    background: white;
-    padding: 0.5rem;
-  }
+  background: $white;
+  padding: rem($space);
+  margin-bottom: 1px;
 
-  &-body {
-    margin: 0.5rem;
-  }
-
-  &-related {
-    background: lightyellow;
-    color: #777;
-    padding: 0.5rem;
-  }
-
-  &-title,
-  &-subtitle,
-  &-glossary,
-  &-examples {
-    margin: 0 0 0.5rem;
-  }
-
-  &-name {
-    color: navy;
-    text-decoration: none;
+  &-title {
+    margin-top: rem(-3);
+    margin-bottom: rem($small-space);
+    font-size: rem(18);
+    font-weight: 900;
   }
 
   &-subtitle {
-    color: black;
+    font-weight: 900;
+  }
+
+  &-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: rem(11);
+    color: $grey;
+    letter-spacing: rem(0.5);
+  }
+
+  a.Entry-label {
+    color: $red;
   }
 
   &-partOfSpeech {
-    font-weight: normal;
+    color: $grey;
+  }
+
+  &-reference {
+    font-size: rem(15.2);
+    font-weight: 700;
+  }
+
+  &-list {
+    padding-left: rem($space);
+    margin: 0;
+    font-weight: 900;
+
+    &-item {
+      margin-left: rem($small-space);
+      font-weight: 400;
+    }
   }
 
   &-examples {
-    font-style: italic;
-    border-left: 2px solid lightgrey;
-    padding-left: 0.5rem;
+    color: $blue;
+    margin-left: rem($small-space*2);
+    @include smooth-text;
 
     &--tetun {
-      color: navy;
+      margin-top: rem($small-space);
     }
+
     &--english {
-      color: grey;
+      font-style: italic;
+      margin-bottom: rem($small-space);
     }
   }
 
   &-subentries {
-    margin-left: 3em;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    margin-top: rem($small-space);
   }
 }
 

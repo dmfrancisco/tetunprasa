@@ -1,4 +1,4 @@
-require "dit_dictionary_importer"
+require "dit_dictionary_parser"
 
 namespace :app do
   namespace :import do
@@ -16,7 +16,7 @@ namespace :app do
 
         Dir.glob(pattern).each do |filename|
           html_source = File.read(filename)
-          entries = DitDictionaryImporter.new(html_source).parse
+          entries = DitDictionaryParser.new(html_source).parse
 
           entries.each do |entry|
             record = Entry.new entry.to_h.except(:subentries)

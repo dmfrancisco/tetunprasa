@@ -1,10 +1,10 @@
 require 'ostruct'
 
-# Extract data from the DIT (Dili Institute of Technology) Tetun-English interactive dictionary
+# Parse data from the DIT (Dili Institute of Technology) Tetun-English interactive dictionary
 # You can download it here: https://goo.gl/deIvag
 # More information at: http://www.tetundit.tl
 #
-class DitDictionaryImporter
+class DitDictionaryParser
   def initialize(html_source)
     @page = Nokogiri::HTML(html_source)
   end
@@ -15,6 +15,7 @@ class DitDictionaryImporter
 
     nodes.each do |node|
       new_entry = OpenStruct.new({
+        letter: parse_letter,
         subentries: [],
         antonyms: [],
         synonyms: [],
@@ -23,7 +24,7 @@ class DitDictionaryImporter
         categories: [],
         examples: {},
         cross_references: [],
-        main_cross_references: [],
+        variants: [],
         origin: []
       })
 
@@ -195,7 +196,7 @@ class DitDictionaryImporter
       when 'lpPhonetic'
         # TODO
       when 'lpMainCrossRef'
-        entry.main_cross_references << clean(node.text)
+        entry.variants << clean(node.text)
       when 'lpScientific'
         # TODO Scientific names of plants
       when 'lpCrossRef'
@@ -216,6 +217,11 @@ class DitDictionaryImporter
 
     raise Disionariu::ParsingError, "Entry with no name: #{ parent_node }" unless entry.name
     return entry
+  end
+
+  # @return [String] Letter of the alphabet this file is about
+  def parse_letter
+    @page.at('.lpTitlePara').text.first
   end
 
   # Utility method that removes trailing whitespace and punctuation

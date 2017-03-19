@@ -1,77 +1,92 @@
-<% nest = true unless local_assigns.has_key? :nest %>
+<% if entry.part_of_speech? %>
+  <span class="Entry-partOfSpeech u-xsr">
+    <em><%= entry.part_of_speech %></em>
+  </span>
+<% end %>
 
-<div class="Entry">
-  <div class="Entry-header">
-    <h2 class="Entry-title">
-      <%= link_to entry.name, { search: entry.name }, class: "Entry-name" %>
+<span class="Entry-glossary u-xsr">
+  <%= entry.glossary_english %>.
+</span>
 
-      <small class="Entry-partOfSpeech">
-        <em><%= entry.part_of_speech %></em>
-      </small>
-    </h2>
+<% if entry.info.present? %>
+  <span class="Entry-glossary u-xsr">
+    <em><%= entry.info %>.</em>
+  </span>
+<% end %>
 
-    <div class="Entry-glossary">
-      <% if entry.glossary_english.present? %>
-        <%= entry.glossary_english %>.
-      <% end %>
+<% if entry.similar.any? %>
+  <a href="#" class="Entry-label" data-sheet="<%= entry.similar.to_json %>">Similar</a>
+  <span class="u-xsr"><%= entry.similar.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+<% end %>
 
-      <% if entry.info.present? %>
-        <div><em><%= entry.info %>.</em></div>
-      <% end %>
-    </div>
+<% if entry.synonyms.any? %>
+  <a href="#" class="Entry-label" data-sheet="<%= entry.synonyms.to_json %>">Synonym</a>
+  <span class="u-xsr"><%= entry.synonyms.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+<% end %>
 
-    <blockquote class="Entry-examples">
-      <% entry.examples.each do |tetun, english| %>
-        <div class="Entry-examples--tetun"><%= tetun %></div>
-        <div class="Entry-examples--english"><%= english %></div>
-      <% end %>
-    </blockquote>
-  </div>
+<% if entry.antonyms.any? %>
+  <a href="#" class="Entry-label" data-sheet="<%= entry.antonyms.to_json %>">Antonym</a>
+  <span class="u-xsr"><%= entry.antonyms.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+<% end %>
 
-  <div class="Entry-body">
-    <% if entry.categories.any? %>
-      <div>
-        <strong>Categories:</strong>
-        <%= entry.categories.join(", ") %>
-      </div>
+<% if entry.male_counterpart.present? %>
+  <a href="#" class="Entry-label" data-sheet="<%= [entry.male_counterpart].to_json %>">Male counterpart</a>
+  <span class="u-xsr"><strong class="Entry-reference"><%= entry.male_counterpart %></strong>.</span>
+<% end %>
+
+<% if entry.female_counterpart.present? %>
+  <a href="#" class="Entry-label" data-sheet="<%= [entry.female_counterpart].to_json %>">Female counterpart</a>
+  <span class="u-xsr"><strong class="Entry-reference"><%= entry.female_counterpart %></strong>.</span>
+<% end %>
+
+<% if entry.counterpart.any? %>
+  <a href="#" class="Entry-label" data-sheet="<%= entry.counterpart.to_json %>">Counterpart</a>
+  <span class="u-xsr"><%= entry.counterpart.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+<% end %>
+
+<% if entry.variants.any? %>
+  <a href="#" class="Entry-label" data-sheet="<%= entry.variants.to_json %>">Variant</a>
+  <span class="u-xsr"><%= entry.variants.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+<% end %>
+
+<% if entry.cross_references.any? %>
+  <a href="#" class="Entry-label" data-sheet="<%= entry.cross_references.to_json %>">See also</a>
+  <span class="u-xsr"><%= entry.cross_references.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+<% end %>
+
+<% if entry.usage.present? %>
+  <strong class="Entry-label">Usage</strong>
+  <span class="u-xsr"><%= entry.usage %>.</span>
+<% end %>
+
+<% if entry.origin.any? %>
+  <strong class="Entry-label">From</strong>
+  <span class="u-xsr"><%= entry.origin.to_sentence %>.</span>
+<% end %>
+
+<% if entry.subentries.any? %>
+  <ul class="Entry-subentries">
+    <% entry.subentries.each do |subentry| %>
+      <li>
+        <strong class="Entry-subtitle u-xsr"><%= subentry.name %></strong>
+
+        <% if subentry.part_of_speech? %>
+          <span class="Entry-partOfSpeech u-xsr">
+            <em><%= subentry.part_of_speech %></em>
+          </span>
+        <% end %>
+
+        <span class="Entry-glossary u-xsr">
+          <%= subentry.glossary_english %>.
+        </span>
+
+        <% if subentry.examples.any? %>
+          <% subentry.examples.each do |tetun, english| %>
+            <div class="Entry-examples Entry-examples--tetun"><%= tetun %></div>
+            <div class="Entry-examples Entry-examples--english"><%= english %></div>
+          <% end %>
+        <% end %>
+      </li>
     <% end %>
-
-    <% if entry.usage.present? %>
-      <div>
-        <strong>Usage:</strong>
-        <%= entry.usage %>
-      </div>
-    <% end %>
-
-    <% if entry.origin.any? %>
-      <div>
-        <strong>From:</strong>
-        <%= entry.origin.to_sentence %>
-      </div>
-    <% end %>
-  </div>
-
-  <%= render partial: "related_entries", locals: { entries: entry.main_cross_references, title: "Variant", nest: nest } %>
-
-  <%= render partial: "related_entries", locals: { entries: [entry.male_counterpart], title: "Male counterpart", nest: nest } %>
-
-  <%= render partial: "related_entries", locals: { entries: [entry.female_counterpart], title: "Female counterpart", nest: nest } %>
-
-  <%= render partial: "related_entries", locals: { entries: entry.counterpart, title: "Counterpart", nest: nest } %>
-
-  <%= render partial: "related_entries", locals: { entries: entry.synonyms, title: "Synonyms", nest: nest } %>
-
-  <%= render partial: "related_entries", locals: { entries: entry.antonyms, title: "Antonyms", nest: nest } %>
-
-  <%= render partial: "related_entries", locals: { entries: entry.similar, title: "Similar", nest: nest } %>
-
-  <%= render partial: "related_entries", locals: { entries: entry.cross_references, title: "See also", nest: nest } %>
-</div>
-
-<div class="Entry-subentries">
-  <% if entry.parent.nil? %>
-    <% entry.subentries.each do |entry| %>
-      <%= render partial: entry, locals: { nest: false } %>
-    <% end %>
-  <% end %>
-</div>
+  </ul>
+<% end %>

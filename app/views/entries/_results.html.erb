@@ -1,0 +1,27 @@
+<% if @results.group(:name_for_group).matches.zero? %>
+  <div class="Entry--empty">
+    No results.
+  </div>
+<% else %>
+  <% @results.group(:name_for_group).groups.each do |group| %>
+    <div class="Entry">
+      <h3 class="Entry-title">
+        <%= group.value %>
+      </h3>
+
+      <% if group.results.count > 1 %>
+        <ol class="Entry-list">
+          <% group.results.each do |entry| %>
+            <li>
+              <div class="Entry-list-item">
+                <%= render "entry", entry: entry %>
+              </div>
+            </li>
+          <% end %>
+        </ol>
+      <% else %>
+        <%= render "entry", entry: group.results.first %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
