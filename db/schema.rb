@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 20170314231229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -47,26 +46,26 @@ ActiveRecord::Schema.define(version: 20170314231229) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "entries", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
-    t.uuid   "parent_id"
-    t.string "slug",               null: false
-    t.string "name",               null: false
-    t.string "letter",             null: false
-    t.text   "glossary_english"
-    t.text   "info"
-    t.string "male_counterpart"
-    t.string "female_counterpart"
-    t.string "part_of_speech"
-    t.string "usage"
-    t.json   "examples"
-    t.string "origin",                          array: true
-    t.string "antonyms",                        array: true
-    t.string "synonyms",                        array: true
-    t.string "similar",                         array: true
-    t.string "categories",                      array: true
-    t.string "counterpart",                     array: true
-    t.string "cross_references",                array: true
-    t.string "variants",                        array: true
+  create_table "entries", force: :cascade do |t|
+    t.integer "parent_id"
+    t.string  "slug",               null: false
+    t.string  "name",               null: false
+    t.string  "letter",             null: false
+    t.text    "glossary_english"
+    t.text    "info"
+    t.string  "male_counterpart"
+    t.string  "female_counterpart"
+    t.string  "part_of_speech"
+    t.string  "usage"
+    t.json    "examples"
+    t.string  "origin",                          array: true
+    t.string  "antonyms",                        array: true
+    t.string  "synonyms",                        array: true
+    t.string  "similar",                         array: true
+    t.string  "categories",                      array: true
+    t.string  "counterpart",                     array: true
+    t.string  "cross_references",                array: true
+    t.string  "variants",                        array: true
     t.index ["parent_id"], name: "index_entries_on_parent_id", using: :btree
   end
 

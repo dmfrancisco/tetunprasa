@@ -1,9 +1,7 @@
 class CreateEntries < ActiveRecord::Migration[5.0]
   def change
-    enable_extension 'uuid-ossp'
-
-    create_table :entries, id: :uuid do |t|
-      t.belongs_to :parent, type: :uuid, index: true
+    create_table :entries do |t|
+      t.belongs_to :parent, index: true
 
       t.string :slug, null: false
       t.string :name, null: false

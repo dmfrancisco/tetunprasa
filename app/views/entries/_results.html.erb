@@ -1,9 +1,15 @@
-<% if @results.group(:name_for_group).matches.zero? %>
-  <div class="Entry--empty">
-    No results.
+<% use_anchor = false unless local_assigns.has_key? :use_anchor %>
+
+<% if results.group(:name).matches.zero? %>
+  <div class="Entry Entry--empty">
+    Sorry, no results were found.
   </div>
 <% else %>
-  <% @results.group(:name_for_group).groups.each do |group| %>
+  <% results.group(:name).groups.each do |group| %>
+    <% if use_anchor %>
+      <div id="<%= group.value.parameterize %>" class="u-anchor"></div>
+    <% end %>
+
     <div class="Entry">
       <h3 class="Entry-title">
         <%= group.value %>
@@ -14,13 +20,13 @@
           <% group.results.each do |entry| %>
             <li>
               <div class="Entry-list-item">
-                <%= render "entry", entry: entry %>
+                <%= render "entry", group: group, entry: entry, use_anchor: use_anchor %>
               </div>
             </li>
           <% end %>
         </ol>
       <% else %>
-        <%= render "entry", entry: group.results.first %>
+        <%= render "entry", group: group, entry: group.results.first, use_anchor: use_anchor %>
       <% end %>
     </div>
   <% end %>

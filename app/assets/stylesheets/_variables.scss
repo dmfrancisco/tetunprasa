@@ -8,9 +8,15 @@ $red: #c12436;
 $black: #000;
 $white: #fff;
 
+$background-color: $light-grey;
+
 // Dimensions
 $gutter: 30;
 $main-margin-left: 65;
+$topbar-height: 55;
 
 // Fonts
 $font-family-sans-serif: Lato;
+
+// Others
+$global-shadow: 0 0 rem(10) rgba($black, 0.1);

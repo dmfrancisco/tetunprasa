@@ -1,0 +1,7 @@
+// Update the side sheet
+<% if related %>
+  $("#related").html("<%= escape_javascript render('results', results: related) %>");
+  Sheet.show();
+<% else %>
+  Sheet.hide();
+<% end %>

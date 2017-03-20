@@ -1,3 +1,8 @@
+<% use_anchor = false unless local_assigns.has_key? :use_anchor %>
+
+<% params = permitted_params.permit(:anchor, :letra, :buka, :konsulta) %>
+<% params = params.merge(anchor: group.value.parameterize) if use_anchor %>
+
 <% if entry.part_of_speech? %>
   <span class="Entry-partOfSpeech u-xsr">
     <em><%= entry.part_of_speech %></em>
@@ -17,42 +22,42 @@
 <% end %>
 
 <% if entry.similar.any? %>
-  <a href="#" class="Entry-label" data-sheet="<%= entry.similar.to_json %>">Similar</a>
+  <%= link_to "Similar", params.merge(konsulta: entry.related_to_ref(:similar)), remote: true, class: "Entry-label" %>
   <span class="u-xsr"><%= entry.similar.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.synonyms.any? %>
-  <a href="#" class="Entry-label" data-sheet="<%= entry.synonyms.to_json %>">Synonym</a>
+  <%= link_to "Synonym", params.merge(konsulta: entry.related_to_ref(:synonyms)), remote: true, class: "Entry-label" %>
   <span class="u-xsr"><%= entry.synonyms.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.antonyms.any? %>
-  <a href="#" class="Entry-label" data-sheet="<%= entry.antonyms.to_json %>">Antonym</a>
+  <%= link_to "Antonym", params.merge(konsulta: entry.related_to_ref(:antonyms)), remote: true, class: "Entry-label" %>
   <span class="u-xsr"><%= entry.antonyms.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.male_counterpart.present? %>
-  <a href="#" class="Entry-label" data-sheet="<%= [entry.male_counterpart].to_json %>">Male counterpart</a>
+  <%= link_to "Male counterpart", params.merge(konsulta: entry.related_to_ref(:male_counterpart)), remote: true, class: "Entry-label" %>
   <span class="u-xsr"><strong class="Entry-reference"><%= entry.male_counterpart %></strong>.</span>
 <% end %>
 
 <% if entry.female_counterpart.present? %>
-  <a href="#" class="Entry-label" data-sheet="<%= [entry.female_counterpart].to_json %>">Female counterpart</a>
+  <%= link_to "Female counterpart", params.merge(konsulta: entry.related_to_ref(:female_counterpart)), remote: true, class: "Entry-label" %>
   <span class="u-xsr"><strong class="Entry-reference"><%= entry.female_counterpart %></strong>.</span>
 <% end %>
 
 <% if entry.counterpart.any? %>
-  <a href="#" class="Entry-label" data-sheet="<%= entry.counterpart.to_json %>">Counterpart</a>
+  <%= link_to "Counterpart", params.merge(konsulta: entry.related_to_ref(:counterpart)), remote: true, class: "Entry-label" %>
   <span class="u-xsr"><%= entry.counterpart.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.variants.any? %>
-  <a href="#" class="Entry-label" data-sheet="<%= entry.variants.to_json %>">Variant</a>
+  <%= link_to "Variant", params.merge(konsulta: entry.related_to_ref(:variants)), remote: true, class: "Entry-label" %>
   <span class="u-xsr"><%= entry.variants.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.cross_references.any? %>
-  <a href="#" class="Entry-label" data-sheet="<%= entry.cross_references.to_json %>">See also</a>
+  <%= link_to "See also", params.merge(konsulta: entry.related_to_ref(:cross_references)), remote: true, class: "Entry-label" %>
   <span class="u-xsr"><%= entry.cross_references.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
@@ -68,7 +73,7 @@
 
 <% if entry.subentries.any? %>
   <ul class="Entry-subentries">
-    <% entry.subentries.each do |subentry| %>
+    <% entry.subentries.order(:name).each do |subentry| %>
       <li>
         <strong class="Entry-subtitle u-xsr"><%= subentry.name %></strong>
 

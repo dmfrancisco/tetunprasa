@@ -12,6 +12,10 @@
     <h2 class="Container-titulu">
       Common phrases
     </h2>
+
+    <div class="Entry Entry--empty">
+      To do.
+    </div>
   </div>
 
   <div class="Container-prinsipal">
@@ -29,7 +33,9 @@
       </div>
     </div>
 
-    <%= render "results" %>
+    <div id="results">
+      <%= render "results", results: results, use_anchor: true %>
+    </div>
   </div>
 
   <div class="Container-footer">
@@ -40,5 +46,18 @@
     <span class="Container-footer-nota">
       This page is not affiliated with the Dili Institute of Technology.
     </span>
+  </div>
+</div>
+
+<div id="sheet" class="Sheet animated" style="<%= related ? '' : 'display:none' %>" data-turbolinks-permanent>
+  <div class="Sheet-header">
+    <h2 class="Sheet-titulu">Related</h2>
+    <%= link_to "✕", permitted_params.merge(konsulta: nil), id: "close", class: "Sheet-close" %>
+  </div>
+
+  <div id="related">
+    <% if related %>
+      <%= render "results", results: related %>
+    <% end %>
   </div>
 </div>

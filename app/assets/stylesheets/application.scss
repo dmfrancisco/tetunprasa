@@ -1,37 +1,24 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
-
+@import "animate";
 @import "mixins";
 @import "variables";
 @import "utilities";
 
 body {
-  $background-color: $light-grey;
-
   background: $background-color;
   font-family: $font-family-sans-serif;
 }
 
 .Topbar {
   $topbar-color: $orange;
-  $topbar-height: 55;
 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 42;
   background: $topbar-color;
   height: rem($topbar-height);
-  box-shadow: 0 0 rem(10) rgba($black, 0.1);
+  box-shadow: $global-shadow;
 
   &-lafaek {
     background: $black url(lafaek.svg) no-repeat;
@@ -67,8 +54,7 @@ body {
 }
 
 .Container {
-  margin: rem($gutter);
-  margin-left: rem($main-margin-left);
+  margin: rem($gutter + $topbar-height) rem($gutter) rem($gutter) rem($main-margin-left);
   overflow: auto;
 
   &-titulu {
@@ -165,7 +151,7 @@ body {
 
   background: $white;
   padding: rem($space);
-  margin-bottom: 1px;
+  border-bottom: 1px solid $background-color;
 
   &-title {
     margin-top: rem(-3);
@@ -230,6 +216,43 @@ body {
     padding-left: 0;
     margin: 0;
     margin-top: rem($small-space);
+  }
+}
+
+.Sheet {
+  position: fixed;
+  margin-right: -1 * rem($main-margin-left - $gutter);
+  padding-right: rem($main-margin-left - $gutter);
+  padding-top: rem($topbar-height);
+  box-sizing: border-box;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 40%;
+  background: $white;
+  box-shadow: $global-shadow;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 41;
+
+  &-header {
+    @extend .Entry;
+    overflow: auto;
+    position: relative;
+  }
+
+  &-titulu {
+    @extend .Container-titulu;
+    margin: 0;
+  }
+
+  &-close {
+    position: absolute;
+    top: rem(12);
+    right: rem(12);
+    text-align: center;
+    text-decoration: none;
+    color: $red;
   }
 }
 

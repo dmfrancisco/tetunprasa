@@ -1,3 +1,10 @@
 .u-xsr {
   padding-right: rem(4);
 }
+
+// Offsets the anchor to adjust for fixed topbar
+.u-anchor {
+  position: relative;
+  top: -1 * rem($topbar-height);
+  visibility: hidden;
+}
