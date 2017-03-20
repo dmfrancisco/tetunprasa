@@ -33,6 +33,7 @@ body {
     background: url(buka.svg) no-repeat rem(16) center;
     background-size: rem(19) rem(18);
     float: left;
+    width: 80%;
 
     &-input {
       background: transparent;
@@ -123,8 +124,9 @@ body {
 }
 
 .Alfabetu {
+  @include no-user-select;
+
   background: $lighter-grey;
-  text-align: center;
   overflow: auto;
 
   &-letra {
@@ -136,6 +138,7 @@ body {
     padding-bottom: rem(2);
     color: $red;
     text-decoration: none;
+    text-align: center;
 
     &.is-active {
       background: $white;
@@ -236,7 +239,9 @@ body {
   z-index: 41;
 
   &-header {
+    @include no-user-select;
     @extend .Entry;
+
     overflow: auto;
     position: relative;
   }
@@ -265,4 +270,42 @@ body {
 }
 @media (max-width: 700px) {
   html { font-size: 12px }
+}
+
+// Text selection
+::selection {
+  background: rgba($green, .2);
+  color: $black;
+}
+
+// Pagination with Kaminari
+.pagination {
+  @extend .Alfabetu;
+
+  .page, .next, .last, .prev, .first {
+    color: $grey;
+
+    &, a {
+      @extend .Alfabetu-letra;
+      float: none;
+      display: inline-block;
+      width: auto;
+    }
+
+    a, &.current {
+      padding-left: rem(10);
+      padding-right: rem(10);
+      color: $red;
+    }
+
+    &.current {
+      @extend .Alfabetu-letra.is-active;
+    }
+  }
+}
+
+// Keyword highlighting
+mark {
+  background: rgba(#f8e71c, 0.3);
+  color: $black;
 }

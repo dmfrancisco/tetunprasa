@@ -18,6 +18,8 @@
       <% if group.results.count > 1 %>
         <ol class="Entry-list">
           <% group.results.each do |entry| %>
+            <% next if entry.glossary_english.blank? && entry.part_of_speech.blank? && entry.variants.empty? %>
+
             <li>
               <div class="Entry-list-item">
                 <%= render "entry", group: group, entry: entry, use_anchor: use_anchor %>

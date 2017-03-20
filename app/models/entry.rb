@@ -4,6 +4,7 @@ class Entry < ApplicationRecord
   ALPHABET = ('A'..'Z').to_a - ['C', 'Q', 'W', 'Y']
   RELATED_TYPES = [ :similar, :synonyms, :antonyms, :male_counterpart,
     :female_counterpart, :counterpart, :variants, :cross_references ]
+  PER_PAGE = 50
 
   belongs_to :parent, class_name: 'Entry', foreign_key: 'parent_id'
   has_many :subentries, class_name: 'Entry', foreign_key: 'parent_id'
@@ -14,8 +15,8 @@ class Entry < ApplicationRecord
     string :letter
     string :name
 
-    text :name
-    text :glossary_english
+    text :name, stored: true
+    text :glossary_english, stored: true
     text :info
     text :examples
 

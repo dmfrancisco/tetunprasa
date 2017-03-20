@@ -3,6 +3,7 @@
 //= require turbolinks
 
 var Sheet;
+var Marker;
 
 $(document).ready(function () {
   Sheet = {
@@ -22,8 +23,36 @@ $(document).ready(function () {
     }
   }
 
+  // Hide side sheet on click
   $(document).on("click", "#close", function (e) {
     e.preventDefault();
     Sheet.hide();
   });
+
+  // Setup infinite scrolling
+  $(window).on("scroll", function () {
+    let url = $('.pagination .next a').attr('href');
+
+    if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 200) {
+      $('pagination').html();
+      $.getScript(url);
+    }
+  });
+
+  // Hide pagination since JS is being run
+  $(".pagination").hide();
+
+  // Highlight matches
+  Marker = {
+    mark: function () {
+      var keyword = $("input[name='buka']").val();
+
+      $("#results").unmark({
+        done: function() {
+          $("#results").mark(keyword);
+        }
+      });
+    }
+  }
+  Marker.mark();
 });

@@ -2,6 +2,11 @@
 <% if related %>
   $("#related").html("<%= escape_javascript render('results', results: related) %>");
   Sheet.show();
-<% else %>
-  Sheet.hide();
+<% elsif params[:page].to_i > 1 %>
+  $("#results").append("<%= escape_javascript render('results', results: results) %>");
+
+  $(".pagination").replaceWith("<%= escape_javascript render('pagination', results: results) %>");
+  $(".pagination").hide();
+
+  Marker.mark();
 <% end %>
