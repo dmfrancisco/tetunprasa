@@ -4,9 +4,11 @@
   </span>
 <% end %>
 
-<span class="Entry-glossary u-xsr">
-  <%= entry.glossary_english %>.
-</span>
+<% if entry.glossary_english.present? %>
+  <span class="Entry-glossary u-xsr">
+    <%= entry.glossary_english %>.
+  </span>
+<% end %>
 
 <% if entry.info.present? %>
   <span class="Entry-glossary u-xsr">
@@ -76,9 +78,11 @@
           </span>
         <% end %>
 
-        <span class="Entry-glossary u-xsr">
-          <%= subentry.glossary_english %>.
-        </span>
+        <% if subentry.glossary_english.present? %>
+          <span class="Entry-glossary u-xsr">
+            <%= subentry.glossary_english %>.
+          </span>
+        <% end %>
 
         <% if subentry.examples.any? %>
           <% subentry.examples.each do |tetun, english| %>

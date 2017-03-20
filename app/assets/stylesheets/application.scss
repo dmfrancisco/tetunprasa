@@ -136,6 +136,29 @@ body {
   }
 }
 
+.Alfabetu {
+  background: $lighter-grey;
+  text-align: center;
+  overflow: auto;
+
+  &-letra {
+    display: block;
+    float: left;
+    width: 100/23 * 1%;
+    line-height: rem(24);
+    height: rem(24);
+    padding-bottom: rem(2);
+    color: $red;
+    text-decoration: none;
+
+    &.is-active {
+      background: $white;
+      font-weight: 900;
+      font-size: rem(15);
+    }
+  }
+}
+
 .Entry {
   $space: 15;
   $small-space: 10;

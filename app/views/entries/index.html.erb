@@ -19,6 +19,16 @@
       Definitions
     </h2>
 
+    <div class="Alfabetu">
+      <% Entry::ALPHABET.each do |letter| %>
+        <%= link_to letter, { letra: letter },
+          class: "Alfabetu-letra #{ (params[:buka].nil? && params[:letra] == letter) ? 'is-active' : '' }" %>
+      <% end %>
+      <div class="Alfabetu-letra <%= params[:buka].present? ? 'is-active' : '' %>">
+        <%= render "buka" %>
+      </div>
+    </div>
+
     <%= render "results" %>
   </div>
 

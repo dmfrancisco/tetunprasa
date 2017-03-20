@@ -1,6 +1,8 @@
 class Entry < ApplicationRecord
   extend FriendlyId
 
+  ALPHABET = ('A'..'Z').to_a - ['C', 'Q', 'W', 'Y']
+
   belongs_to :parent, class_name: 'Entry', foreign_key: 'parent_id'
   has_many :subentries, class_name: 'Entry', foreign_key: 'parent_id'
 
@@ -16,7 +18,7 @@ class Entry < ApplicationRecord
 
     # Fields for grouping and sorting
     string(:name_for_group) { |e| e.name.downcase }
-    string(:name_for_order) { |e| I18n.transliterate(e.name).downcase }
+    string(:name_for_order) { |e| I18n.transliterate(e.name).downcase.sub(/^\-/, '') }
     boolean(:is_subentry) { |e| e.parent_id.present? }
   end
 

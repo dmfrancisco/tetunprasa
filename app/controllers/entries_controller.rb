@@ -18,7 +18,7 @@ class EntriesController < ApplicationController
 
   def browse
     @results = Entry.solr_search do
-      with :letter, (params[:letter] || 'A').upcase
+      with :letter, (Entry::ALPHABET.include?(params[:letra]) ? params[:letra] : 'A').upcase
       order_by :name_for_order
       group(:name_for_group) { limit 20 }
       with :is_subentry, false # Only show top level entries
