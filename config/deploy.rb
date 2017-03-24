@@ -34,8 +34,12 @@ set :deploy_to, ENV['SERVER_DIR']
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+# Instead of compiling assets on the server, we will do this locally.
+# Clear existing task so we can replace it rather than "add" to it.
+Rake::Task["deploy:compile_assets"].clear
+
 namespace :deploy do
-  desc 'Restart application'
+  desc "Restart application"
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
@@ -51,6 +55,33 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+    end
+  end
+
+  desc "Precompile assets locally and then rsync to web servers"
+  task :compile_assets do
+    public_assets_dir = "./public/assets/"
+
+    run_locally do
+      # Clean up
+      execute "rm -rf #{ public_assets_dir }"
+
+      # Compile assets locally
+      execute "RAILS_ENV=#{ fetch(:stage) } bundle exec rake assets:precompile"
+    end
+
+    # Sync to each server
+    on roles(fetch(:assets_roles, [:web])) do
+      remote_dir = "#{ host.user }@#{ host.hostname }:#{ release_path }"
+
+      run_locally do
+        execute "rsync -av --delete #{ public_assets_dir } #{ remote_dir }/public/assets/"
+      end
+    end
+
+    run_locally do
+      # Clean up
+      execute "rm -rf #{ public_assets_dir }"
     end
   end
 end
