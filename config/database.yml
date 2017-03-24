@@ -17,5 +17,7 @@ test:
 
 production:
   <<: *default
-  database: disionariu_production
+  database: <%= ENV['APP_DATABASE_NAME'] %>
   prepared_statements: false
+  username: <%= ENV['APP_DATABASE_USERNAME'] %>
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
