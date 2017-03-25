@@ -63,3 +63,16 @@ Additional packages you may need to install to get it running:
 ```shell
 sudo apt-get install libgmp-dev
 ```
+
+You'll also need to update Solr schema.xml file available at `/usr/share/solr/conf/schema.xml`
+and paste the contents from https://git.io/vSkFa.
+
+Make sure you also close access to the solr admin panel. Here's an example setup (you may need `sudo`):
+
+```shell
+ufw default deny incoming
+ufw allow ssh
+ufw allow www
+ufw deny 8080/tcp
+ufw enable
+```
