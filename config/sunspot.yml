@@ -1,9 +1,9 @@
 production:
   solr:
-    hostname: localhost
-    port: 8983
+    hostname: <%= ENV['SOLR_HOST'] %>
+    port: <%= ENV['SOLR_PORT'] %>
     log_level: WARNING
-    path: /solr/production
+    path: <%= ENV['SOLR_PATH'] %>
     # read_timeout: 2
     # open_timeout: 0.5
 
@@ -20,4 +20,3 @@ test:
     port: 8981
     log_level: WARNING
     path: /solr/test
-    

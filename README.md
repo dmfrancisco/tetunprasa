@@ -19,6 +19,9 @@ export APP_DATABASE_NAME="..."
 export APP_DATABASE_USERNAME="..."
 export APP_DATABASE_PASSWORD="..."
 export SECRET_KEY_BASE="..."
+export SOLR_HOST="..."
+export SOLR_PORT="..."
+export SOLR_PATH="..."
 ```
 
 Finally, you should create a clean database or restore one from a dump file:
