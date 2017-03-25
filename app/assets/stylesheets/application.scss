@@ -51,6 +51,12 @@ body {
       &::placeholder {
         color: $black;
       }
+
+      // Remove input background colour for chrome autocomplete
+      // From: http://stackoverflow.com/q/2781549
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px $orange inset;
+      }
     }
   }
 }
