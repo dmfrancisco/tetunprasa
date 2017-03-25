@@ -31,7 +31,7 @@ $(document).ready(function () {
 
   // Setup infinite scrolling
   $(window).on("scroll", function () {
-    let url = $('.pagination .next a').attr('href');
+    var url = $('.pagination .next a').attr('href');
 
     if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 200) {
       $('pagination').html();
@@ -46,12 +46,15 @@ $(document).ready(function () {
   Marker = {
     mark: function () {
       var keyword = $("input[name='buka']").val();
+      var $results = $("#results");
 
-      $("#results").unmark({
-        done: function() {
-          $("#results").mark(keyword);
-        }
-      });
+      if ($results.find(".Entry--empty").length == 0) {
+        $results.unmark({
+          done: function() {
+            $("#results").mark(keyword);
+          }
+        });
+      }
     }
   }
   Marker.mark();
