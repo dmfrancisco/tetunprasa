@@ -23,7 +23,7 @@ body {
   box-shadow: $global-shadow;
 
   &-lafaek {
-    background: $black url(lafaek.svg) no-repeat;
+    background: $black image-url("lafaek.svg") no-repeat;
     background-size: rem(65) rem(55);
 
     width: rem($main-margin-left);
@@ -32,7 +32,7 @@ body {
   }
 
   &-buka {
-    background: url(buka.svg) no-repeat rem(16) center;
+    background: image-url("buka.svg") no-repeat rem(16) center;
     background-size: rem(19) rem(18);
     float: left;
     width: 75%;
