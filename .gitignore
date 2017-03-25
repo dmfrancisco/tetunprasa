@@ -19,3 +19,12 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore Solr generated files.
+/solr
+
+# Credentials and other sensitive information.
+.env
+
+# Others.
+/lexicon
