@@ -1,24 +1,62 @@
-# README
+#### Setting up a production environment
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The app is hosted on DigitalOcean and the one-click _Ruby on Rails on Ubuntu 14.04
+(Postgres, Nginx, Unicorn)_ droplet was used. It includes Ruby v2.2.1, installed with RVM,
+and Rails v4.2.4.
 
-Things you may want to cover:
+Capistrano is used for deployment. You should enable passwordless sudo for the `rails`
+user by adding the following above the `#includedir` line:
 
-* Ruby version
+```shell
+rails ALL=(ALL) NOPASSWD:ALL
+```
 
-* System dependencies
+After that, set any required environment variables inside the user's `.bashrc` file. Be sure
+to put them before the comment that says "If not running interactively, don't do anything":
 
-* Configuration
+```shell
+export APP_DATABASE_NAME="..."
+export APP_DATABASE_USERNAME="..."
+export APP_DATABASE_PASSWORD="..."
+export SECRET_KEY_BASE="..."
+```
 
-* Database creation
+Finally, you should create a clean database or restore one from a dump file:
 
-* Database initialization
+```shell
+pg_dump -U rails -W -h localhost -f jscoach.sql jscoach_development
+createdb jscoach_production -U rails -W -h localhost
+psql -U rails -W -h localhost -d jscoach_production -f ~/jscoach.sql
+```
 
-* How to run the test suite
+If you ever end up needing more permissions (for example, to create extensions) you can:
 
-* Services (job queues, cache servers, search engines, etc.)
+```shell
+sudo -u postgres psql
+postgres=# alter role rails with superuser;
+```
 
-* Deployment instructions
+You should now be able to deploy the application:
 
-* ...
+```shell
+bundle exec cap production setup
+bundle exec cap production deploy
+```
+
+To avoid having to enter your password on every deploy, copy your public SSH key:
+
+```shell
+cat ~/.ssh/id_rsa.pub | ssh rails@123.45.56.78 "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+```
+
+To restart the search server just run:
+
+```shell
+sudo service tomcat6 restart
+```
+
+Additional packages you may need to install to get it running:
+
+```shell
+sudo apt-get install libgmp-dev
+```
