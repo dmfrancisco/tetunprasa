@@ -51,7 +51,9 @@ body {
       &::placeholder {
         color: $black;
       }
-
+      &::-ms-clear {
+        display: none;
+      }
       // Remove input background colour for chrome autocomplete
       // From: http://stackoverflow.com/q/2781549
       &:-webkit-autofill {
