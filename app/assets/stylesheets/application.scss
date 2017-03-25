@@ -6,10 +6,12 @@
 body {
   background: $background-color;
   font-family: $font-family-sans-serif;
+  min-width: $body-min-width;
 }
 
 .Topbar {
   $topbar-color: $orange;
+  min-width: $body-min-width;
 
   position: fixed;
   top: 0;
@@ -33,7 +35,7 @@ body {
     background: url(buka.svg) no-repeat rem(16) center;
     background-size: rem(19) rem(18);
     float: left;
-    width: 80%;
+    width: 75%;
 
     &-input {
       background: transparent;
@@ -43,8 +45,7 @@ body {
       font-family: $font-family-sans-serif;
       height: rem($topbar-height - 2);
       outline: none;
-      padding-left: rem($gutter/2);
-      margin-left: rem($gutter);
+      margin-left: rem($gutter + $gutter/2);
       width: 100%;
 
       &::placeholder {
@@ -55,7 +56,7 @@ body {
 }
 
 .Container {
-  margin: rem($gutter + $topbar-height) rem($gutter) rem($gutter) rem($main-margin-left);
+  margin: rem($gutter/2 + $topbar-height) rem($gutter/2) rem($gutter/2);
   overflow: auto;
 
   &-titulu {
@@ -108,7 +109,12 @@ body {
   }
 
   // Improvements for bigger screens
+  @media (min-width: 321px) {
+    margin: rem($gutter + $topbar-height) rem($gutter) rem($gutter);
+  }
   @media (min-width: 601px) {
+    margin-left: rem($main-margin-left);
+
     &-prinsipal {
       width: 60%;
     }
@@ -144,6 +150,11 @@ body {
       background: $white;
       font-weight: 900;
       font-size: rem(15);
+    }
+
+    svg {
+      width: rem(11);
+      height: rem(11);
     }
   }
 }
@@ -231,7 +242,7 @@ body {
   top: 0;
   bottom: 0;
   right: 0;
-  width: 40%;
+  width: 96%;
   background: $white;
   box-shadow: $global-shadow;
   overflow-y: auto;
@@ -258,6 +269,14 @@ body {
     text-align: center;
     text-decoration: none;
     color: $red;
+  }
+
+  // Improvements for bigger screens
+  @media (min-width: 321px) {
+    width: 80%;
+  }
+  @media (min-width: 568px) {
+    width: 40%;
   }
 }
 
