@@ -1,7 +1,9 @@
 // Colors
 $lighter-grey: #f0f0f0;
 $light-grey: #e6e6e6;
-$grey: #999;
+$grey: #d3d3d3;
+$dark-grey: #999;
+$darker-grey: #545454;
 $orange: #fec93e;
 $blue: #36579d;
 $green: #019263;
@@ -18,7 +20,7 @@ $topbar-height: 55;
 $body-min-width: 240px;
 
 // Fonts
-$font-family-sans-serif: Lato;
+$font-family-sans-serif: Lato, sans-serif;
 
 // Others
 $global-shadow: 0 0 rem(10) rgba($black, 0.1);

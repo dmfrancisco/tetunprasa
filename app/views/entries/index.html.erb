@@ -10,6 +10,20 @@
 </div>
 
 <div class="Container">
+  <% unless params[:buka].present? %>
+    <div id="promo" class="Container-prinsipal Container-promo" data-turbolinks-permanent>
+      <h1 class="Container-promo-titulu">
+        Type words in english or tetun and get definitions and common phrases.
+      </h1>
+      <p class="Container-promo-details">
+        This tool was built using various open data sources.
+        It is not comprehensive and may contain errors, but may still be
+        valuable to speak and learn tetun-prasa.
+      </p>
+      <%= link_to "✕", "#", id: "promo-close", class: "Container-promo-close" %>
+    </div>
+  <% end %>
+
   <div class="Container-sekundariu">
     <h2 class="Container-titulu">
       Common phrases

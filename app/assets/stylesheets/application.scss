@@ -71,7 +71,7 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     font-size: rem(12);
-    color: $grey;
+    color: $dark-grey;
     letter-spacing: rem(0.6);
     margin-top: 0;
     margin-bottom: rem(10);
@@ -111,8 +111,61 @@ body {
 
     &-nota {
       display: block;
-      color: $grey;
+      color: $dark-grey;
       cursor: default;
+    }
+  }
+
+  &-promo {
+    $small-space: 10;
+    $image-width: 268;
+    $image-height: 148;
+
+    border: 1px solid $grey;
+    padding: rem($small-space);
+    margin-bottom: rem($gutter);
+    position: relative;
+    background-size: rem($image-width) rem($image-height);
+
+    &-titulu,
+    &-details {
+      margin: 0;
+    }
+
+    &-titulu {
+      font-size: rem(22);
+      line-height: rem(27);
+      padding-bottom: rem($small-space);
+      padding-right: rem(15);
+
+      @media (min-width: 321px) {
+        font-size: rem(24);
+        line-height: rem(30);
+      }
+    }
+
+    &-details {
+      color: $darker-grey;
+      line-height: rem(22);
+      @include smooth-text;
+    }
+
+    &-close {
+      @include no-user-select;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: rem($small-space);
+      text-decoration: none;
+      color: $dark-grey;
+      line-height: 0.8;
+    }
+
+    @media (min-width: 1025px) {
+      background: image-url("zaber.svg") no-repeat bottom right;
+      padding-right: $image-width * 1px;
+      min-height: $image-height * 1px;
+      &-titulu, &-details { max-width: rem(560) }
     }
   }
 
@@ -190,7 +243,7 @@ body {
     font-weight: 700;
     text-transform: uppercase;
     font-size: rem(11);
-    color: $grey;
+    color: $dark-grey;
     letter-spacing: rem(0.5);
   }
 
@@ -199,7 +252,7 @@ body {
   }
 
   &-partOfSpeech {
-    color: $grey;
+    color: $dark-grey;
   }
 
   &-reference {
@@ -272,6 +325,7 @@ body {
   }
 
   &-close {
+    @include no-user-select;
     position: absolute;
     top: rem(12);
     right: rem(12);
@@ -311,7 +365,7 @@ body {
   @extend .Alfabetu;
 
   .page, .next, .last, .prev, .first {
-    color: $grey;
+    color: $dark-grey;
 
     &, a {
       @extend .Alfabetu-letra;

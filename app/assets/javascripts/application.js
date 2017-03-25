@@ -29,6 +29,12 @@ $(document).ready(function () {
     Sheet.hide();
   });
 
+  // Hide promo on click
+  $(document).on("click", "#promo-close", function (e) {
+    e.preventDefault();
+    $("#promo").hide();
+  });
+
   // Setup infinite scrolling
   $(window).on("scroll", function () {
     var url = $('.pagination .next a').attr('href');
