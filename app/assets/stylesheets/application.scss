@@ -256,6 +256,7 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 41;
+  -webkit-overflow-scrolling: touch;
 
   &-header {
     @include no-user-select;
