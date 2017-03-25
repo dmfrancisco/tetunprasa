@@ -1,3 +1,5 @@
+<% content_for :title, "#{ params[:buka] } / tetunprasa.com" if params[:buka].present? %>
+
 <div class="Topbar">
   <div class="Topbar-lafaek"></div>
 
@@ -26,7 +28,7 @@
     <div class="Alfabetu">
       <% Entry::ALPHABET.each do |letter| %>
         <%= link_to letter, { letra: letter },
-          class: "Alfabetu-letra #{ (params[:buka].nil? && active_letter == letter) ? 'is-active' : '' }" %>
+          class: "Alfabetu-letra #{ (params[:buka].blank? && active_letter == letter) ? 'is-active' : '' }" %>
       <% end %>
       <div class="Alfabetu-letra <%= params[:buka].present? ? 'is-active' : '' %>">
         <%= render "buka" %>
