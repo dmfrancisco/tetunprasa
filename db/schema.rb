@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314231229) do
+ActiveRecord::Schema.define(version: 20170325211535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 20170314231229) do
     t.string  "female_counterpart"
     t.string  "part_of_speech"
     t.string  "usage"
-    t.json    "examples"
     t.string  "origin",                          array: true
     t.string  "antonyms",                        array: true
     t.string  "synonyms",                        array: true
@@ -67,6 +66,21 @@ ActiveRecord::Schema.define(version: 20170314231229) do
     t.string  "cross_references",                array: true
     t.string  "variants",                        array: true
     t.index ["parent_id"], name: "index_entries_on_parent_id", using: :btree
+  end
+
+  create_table "entries_examples", id: false, force: :cascade do |t|
+    t.integer "entry_id",   null: false
+    t.integer "example_id", null: false
+    t.index ["entry_id", "example_id"], name: "index_entries_examples_on_entry_id_and_example_id", unique: true, using: :btree
+    t.index ["entry_id"], name: "index_entries_examples_on_entry_id", using: :btree
+    t.index ["example_id"], name: "index_entries_examples_on_example_id", using: :btree
+  end
+
+  create_table "examples", force: :cascade do |t|
+    t.string   "tetun",      null: false
+    t.string   "english",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

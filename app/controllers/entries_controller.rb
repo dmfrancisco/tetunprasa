@@ -14,13 +14,14 @@ class EntriesController < ApplicationController
   def data
     {
       results: params[:buka].present? ? search : browse,
-      related: params[:konsulta].present? ? related : nil
+      related: params[:konsulta].present? ? related : nil,
+      examples: params[:buka].present? ? search_examples : intro_examples
     }
   end
 
   def search
     Entry.solr_search do
-      fulltext params[:buka]
+      fulltext clean_search_query(params[:buka])
       group(:name) { limit 20 } # Up to 20 homonyms should be more than sufficient
       paginate page: params[:page], per_page: Entry::PER_PAGE
     end
@@ -44,11 +45,26 @@ class EntriesController < ApplicationController
     end
   end
 
+  def search_examples
+    Example.solr_search do
+      fulltext clean_search_query(params[:buka])
+      paginate page: 1, per_page: 10 # Show the 10 most relevant
+    end.results
+  end
+
+  def intro_examples
+    Example.order("random()").limit(5)
+  end
+
   def permitted_params
     params.permit(:anchor, :letra, :buka, :konsulta)
   end
 
   def active_letter
     Entry::ALPHABET.include?(params[:letra]) ? params[:letra] : 'A'
+  end
+
+  def clean_search_query(query)
+    query.gsub("?", "")
   end
 end

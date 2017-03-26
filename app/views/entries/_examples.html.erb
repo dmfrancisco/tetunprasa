@@ -1,0 +1,12 @@
+<% if examples.empty? %>
+  <div class="Entry Entry--empty">
+    Sorry, no common phrases were found.
+  </div>
+<% else %>
+  <% examples.each do |example| %>
+    <div class="Entry">
+      <div class="Entry-examples Entry-examples--tetun u-nom"><%= example.tetun %></div>
+      <div class="Entry-examples Entry-examples--english u-nom"><%= example.english %></div>
+    </div>
+  <% end %>
+<% end %>

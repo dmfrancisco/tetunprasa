@@ -4,95 +4,102 @@
 <% params = params.merge(anchor: group.value.parameterize) if use_anchor %>
 
 <% if entry.part_of_speech? %>
-  <span class="Entry-partOfSpeech u-xsr">
+  <span class="Entry-partOfSpeech u-xspr">
     <em><%= entry.part_of_speech %></em>
   </span>
 <% end %>
 
 <% if entry.glossary_english.present? %>
-  <span class="Entry-glossary u-xsr">
+  <span class="Entry-glossary u-xspr">
     <%= entry.glossary_english %>.
   </span>
 <% end %>
 
 <% if entry.info.present? %>
-  <span class="Entry-glossary u-xsr">
+  <span class="Entry-glossary u-xspr">
     <em><%= entry.info %>.</em>
   </span>
 <% end %>
 
 <% if entry.similar.any? %>
   <%= link_to "Similar", params.merge(konsulta: entry.related_to_ref(:similar)), remote: true, class: "Entry-label" %>
-  <span class="u-xsr"><%= entry.similar.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+  <span class="u-xspr"><%= entry.similar.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.synonyms.any? %>
   <%= link_to "Synonym", params.merge(konsulta: entry.related_to_ref(:synonyms)), remote: true, class: "Entry-label" %>
-  <span class="u-xsr"><%= entry.synonyms.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+  <span class="u-xspr"><%= entry.synonyms.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.antonyms.any? %>
   <%= link_to "Antonym", params.merge(konsulta: entry.related_to_ref(:antonyms)), remote: true, class: "Entry-label" %>
-  <span class="u-xsr"><%= entry.antonyms.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+  <span class="u-xspr"><%= entry.antonyms.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.male_counterpart.present? %>
   <%= link_to "Male counterpart", params.merge(konsulta: entry.related_to_ref(:male_counterpart)), remote: true, class: "Entry-label" %>
-  <span class="u-xsr"><strong class="Entry-reference"><%= entry.male_counterpart %></strong>.</span>
+  <span class="u-xspr"><strong class="Entry-reference"><%= entry.male_counterpart %></strong>.</span>
 <% end %>
 
 <% if entry.female_counterpart.present? %>
   <%= link_to "Female counterpart", params.merge(konsulta: entry.related_to_ref(:female_counterpart)), remote: true, class: "Entry-label" %>
-  <span class="u-xsr"><strong class="Entry-reference"><%= entry.female_counterpart %></strong>.</span>
+  <span class="u-xspr"><strong class="Entry-reference"><%= entry.female_counterpart %></strong>.</span>
 <% end %>
 
 <% if entry.counterpart.any? %>
   <%= link_to "Counterpart", params.merge(konsulta: entry.related_to_ref(:counterpart)), remote: true, class: "Entry-label" %>
-  <span class="u-xsr"><%= entry.counterpart.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+  <span class="u-xspr"><%= entry.counterpart.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.variants.any? %>
   <%= link_to "Variant", params.merge(konsulta: entry.related_to_ref(:variants)), remote: true, class: "Entry-label" %>
-  <span class="u-xsr"><%= entry.variants.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+  <span class="u-xspr"><%= entry.variants.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.cross_references.any? %>
   <%= link_to "See also", params.merge(konsulta: entry.related_to_ref(:cross_references)), remote: true, class: "Entry-label" %>
-  <span class="u-xsr"><%= entry.cross_references.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
+  <span class="u-xspr"><%= entry.cross_references.map { |s| "<strong class=\"Entry-reference\">#{ s }</strong>" }.join("; ").html_safe %>.</span>
 <% end %>
 
 <% if entry.usage.present? %>
   <strong class="Entry-label">Usage</strong>
-  <span class="u-xsr"><%= entry.usage %>.</span>
+  <span class="u-xspr"><%= entry.usage %>.</span>
 <% end %>
 
 <% if entry.origin.any? %>
   <strong class="Entry-label">From</strong>
-  <span class="u-xsr"><%= entry.origin.to_sentence %>.</span>
+  <span class="u-xspr"><%= entry.origin.to_sentence %>.</span>
+<% end %>
+
+<% if entry.examples.any? %>
+  <% entry.examples.each do |example| %>
+    <div class="Entry-examples Entry-examples--tetun"><%= example.tetun %></div>
+    <div class="Entry-examples Entry-examples--english"><%= example.english %></div>
+  <% end %>
 <% end %>
 
 <% if entry.subentries.any? %>
   <ul class="Entry-subentries">
     <% entry.subentries.order(:name).each do |subentry| %>
       <li>
-        <strong class="Entry-subtitle u-xsr"><%= subentry.name %></strong>
+        <strong class="Entry-subtitle u-xspr"><%= subentry.name %></strong>
 
         <% if subentry.part_of_speech? %>
-          <span class="Entry-partOfSpeech u-xsr">
+          <span class="Entry-partOfSpeech u-xspr">
             <em><%= subentry.part_of_speech %></em>
           </span>
         <% end %>
 
         <% if subentry.glossary_english.present? %>
-          <span class="Entry-glossary u-xsr">
+          <span class="Entry-glossary u-xspr">
             <%= subentry.glossary_english %>.
           </span>
         <% end %>
 
         <% if subentry.examples.any? %>
-          <% subentry.examples.each do |tetun, english| %>
-            <div class="Entry-examples Entry-examples--tetun"><%= tetun %></div>
-            <div class="Entry-examples Entry-examples--english"><%= english %></div>
+          <% subentry.examples.each do |example| %>
+            <div class="Entry-examples Entry-examples--tetun"><%= example.tetun %></div>
+            <div class="Entry-examples Entry-examples--english"><%= example.english %></div>
           <% end %>
         <% end %>
       </li>

@@ -15,24 +15,32 @@ namespace :app do
         puts 'Extracting entries from the source files...'
         Dir.glob(pattern).each do |filename|
           html_source = File.read(filename)
-          entries = DitDictionaryParser.new(html_source).parse
 
-          entries.each do |entry|
-            next if entry.glossary_english.blank? && entry.variants.empty? && entry.subentries.empty?
+          DitDictionaryParser.new(html_source).parse.each do |data|
+            next if data.glossary_english.blank? && data.variants.empty? && data.subentries.empty?
 
-            record = Entry.new entry.to_h.except(:subentries)
-            subentries = entry.subentries.map do |subentry|
-              Entry.new subentry.to_h.except(:subentries)
+            entry = Entry.new data.to_h.except(:subentries, :examples)
+            data.examples.each do |tetun, english|
+              entry.examples << Example.find_or_initialize_by(tetun: tetun, english: english)
             end
 
-            record.subentries << subentries.reject { |e| e.glossary_english.blank? && e.variants.empty? }
-            record.save!
+            subentries = data.subentries.map do |data|
+              Entry.new(data.to_h.except(:subentries, :examples)).tap do |subentry|
+                data.examples.each do |tetun, english|
+                  subentry.examples << Example.find_or_initialize_by(tetun: tetun, english: english)
+                end
+              end
+            end
+
+            entry.subentries = subentries.reject { |s| s.glossary_english.blank? && s.variants.empty? }
+            entry.save!
           end
         end
       end
 
-      # Update search index
+      # Update search indexes
       Entry.reindex
+      Example.reindex
     end
   end
 end

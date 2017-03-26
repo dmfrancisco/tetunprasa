@@ -8,6 +8,7 @@ class Entry < ApplicationRecord
 
   belongs_to :parent, class_name: 'Entry', foreign_key: 'parent_id'
   has_many :subentries, class_name: 'Entry', foreign_key: 'parent_id'
+  has_and_belongs_to_many :examples, uniq: true
 
   friendly_id :slug_candidates, use: :slugged
 
@@ -15,10 +16,10 @@ class Entry < ApplicationRecord
     string :letter
     string :name
 
-    text :name, stored: true
-    text :glossary_english, stored: true
+    text :name
+    text :glossary_english
     text :info
-    text :examples
+    text(:examples) { |e| e.examples.map { |ex| [ ex.tetun, ex.english ] }.flatten.join("; ") }
 
     # Fields for grouping and sorting
     string(:name_for_order) { |e| I18n.transliterate(e.name).downcase.sub(/^\-/, '') }
