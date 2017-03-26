@@ -50,7 +50,7 @@ $(document).ready(function () {
   // Highlight matches
   Marker = {
     mark: function () {
-      var keyword = $("input[name='buka']").val();
+      var keyword = $("input[name='buka']").val().replace(/\"/g, '');
       var $results = $("#results");
 
       if ($results.find(".Entry--empty").length == 0) {
