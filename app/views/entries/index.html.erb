@@ -1,7 +1,7 @@
 <% content_for :title, "#{ params[:buka] } / tetunprasa.com" if params[:buka].present? %>
 
 <div class="Topbar">
-  <div class="Topbar-lafaek"></div>
+  <%= link_to "", root_path, class: "Topbar-lafaek" %>
 
   <%= form_tag root_path, method: :get, enforce_utf8: false, class: "Topbar-buka" do %>
     <%= text_field_tag :buka, params[:buka], id: nil, class: "Topbar-buka-input", tabindex: "1",

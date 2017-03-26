@@ -35,6 +35,11 @@ body {
     width: rem($main-margin-left);
     height: rem($topbar-height);
     float: left;
+    display: block;
+
+    &:focus {
+      outline: none;
+    }
   }
 
   &-buka {
