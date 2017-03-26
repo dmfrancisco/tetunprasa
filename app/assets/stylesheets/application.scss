@@ -3,10 +3,16 @@
 @import "variables";
 @import "utilities";
 
+html {
+  background: $grey;
+  height: 100%;
+}
+
 body {
   background: $background-color;
   font-family: $font-family-sans-serif;
   min-width: $body-min-width;
+  min-height: 100%;
 }
 
 .Topbar {
@@ -80,7 +86,7 @@ body {
 }
 
 .Container {
-  margin: rem($gutter/2 + $topbar-height) rem($gutter/2) rem($gutter/2);
+  padding: rem($gutter/2 + $topbar-height) rem($gutter/2) rem($gutter/2);
   overflow: auto;
 
   &-titulu {
@@ -187,10 +193,10 @@ body {
 
   // Improvements for bigger screens
   @media (min-width: 321px) {
-    margin: rem($gutter + $topbar-height) rem($gutter) rem($gutter);
+    padding: rem($gutter + $topbar-height) rem($gutter) rem($gutter);
   }
   @media (min-width: 601px) {
-    margin-left: rem($main-margin-left);
+    padding-left: rem($main-margin-left);
 
     &-prinsipal {
       width: 60%;
