@@ -6,6 +6,8 @@ var Sheet;
 var Marker;
 
 $(document).ready(function () {
+  $("body").addClass("js");
+
   Sheet = {
     show: function () {
       var $sheet = $("#sheet");
@@ -44,9 +46,6 @@ $(document).ready(function () {
       $.getScript(url);
     }
   });
-
-  // Hide pagination since JS is being run
-  $(".pagination").hide();
 
   // Highlight matches
   Marker = {

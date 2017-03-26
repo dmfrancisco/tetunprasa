@@ -384,6 +384,11 @@ body {
       @extend .Alfabetu-letra.is-active;
     }
   }
+
+  // Hide because of infinite scrolling
+  body.js & {
+    display: none;
+  }
 }
 
 // Keyword highlighting
