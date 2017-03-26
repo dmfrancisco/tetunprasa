@@ -229,7 +229,6 @@ class DitDictionaryParser
     text
       .gsub(/[[:space:]]/, ' ')
       .strip
-      .chomp('.')
       .chomp(':')
   end
 end

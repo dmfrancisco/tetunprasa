@@ -9,10 +9,11 @@ namespace :app do
       end
 
       ActiveRecord::Base.transaction do
-        puts 'Destroying all the existing entries...'
+        puts 'Destroying all the existing entries and examples...'
         Entry.destroy_all
+        Example.destroy_all
 
-        puts 'Extracting entries from the source files...'
+        puts 'Extracting entries and examples from the source files...'
         Dir.glob(pattern).each do |filename|
           html_source = File.read(filename)
 
