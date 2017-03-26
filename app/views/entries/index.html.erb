@@ -4,7 +4,7 @@
   <div class="Topbar-lafaek"></div>
 
   <%= form_tag root_path, method: :get, enforce_utf8: false, class: "Topbar-buka" do %>
-    <%= text_field_tag :buka, params[:buka], id: nil, class: "Topbar-buka-input",
+    <%= text_field_tag :buka, params[:buka], id: nil, class: "Topbar-buka-input", tabindex: "1",
        placeholder: "Buka", autocapitalize: "off", autocorrect: "off", spellcheck: "false" %>
 
     <%= submit_tag "", class: "Topbar-buka-submit", name: "" %>

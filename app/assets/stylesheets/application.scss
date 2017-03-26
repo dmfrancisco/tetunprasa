@@ -71,6 +71,10 @@ body {
       cursor: pointer;
       background: transparent;
       border: none;
+
+      &:focus {
+        outline: none;
+      }
     }
   }
 }
@@ -407,6 +411,12 @@ body {
 mark {
   background: rgba(#f8e71c, 0.3);
   color: $black;
+}
+
+// Focus color (on tab)
+:focus {
+  outline: 1px solid $orange;
+  outline-offset: -1px;
 }
 
 // Turbolinks' progress bar
