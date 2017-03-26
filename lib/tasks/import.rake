@@ -13,26 +13,26 @@ namespace :app do
         Entry.destroy_all
 
         puts 'Extracting entries from the source files...'
-
         Dir.glob(pattern).each do |filename|
           html_source = File.read(filename)
           entries = DitDictionaryParser.new(html_source).parse
 
           entries.each do |entry|
+            next if entry.glossary_english.blank? && entry.variants.empty? && entry.subentries.empty?
+
             record = Entry.new entry.to_h.except(:subentries)
             subentries = entry.subentries.map do |subentry|
               Entry.new subentry.to_h.except(:subentries)
             end
 
-            # Ignore known "---" fake subentries
-            record.subentries << subentries.reject { |e| e.name == '-' * 73 }
+            record.subentries << subentries.reject { |e| e.glossary_english.blank? && e.variants.empty? }
             record.save!
           end
         end
-
-        # Update search index
-        Entry.reindex
       end
+
+      # Update search index
+      Entry.reindex
     end
   end
 end
