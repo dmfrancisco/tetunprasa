@@ -48,7 +48,7 @@ class EntriesController < ApplicationController
   def search_examples
     Example.solr_search do
       fulltext clean_search_query(params[:buka])
-      paginate page: 1, per_page: 10 # Show the 10 most relevant
+      paginate page: 1, per_page: 5 # Show the 5 most relevant
     end.results
   end
 
