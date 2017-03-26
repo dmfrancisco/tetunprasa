@@ -6,6 +6,8 @@
   <%= form_tag root_path, method: :get, enforce_utf8: false, class: "Topbar-buka" do %>
     <%= text_field_tag :buka, params[:buka], id: nil, class: "Topbar-buka-input",
        placeholder: "Buka", autocapitalize: "off", autocorrect: "off", spellcheck: "false" %>
+
+    <%= submit_tag "", class: "Topbar-buka-submit", name: "" %>
   <% end %>
 </div>
 

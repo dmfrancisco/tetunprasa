@@ -36,6 +36,7 @@ body {
     background-size: rem(19) rem(18);
     float: left;
     width: 75%;
+    position: relative;
 
     &-input {
       background: transparent;
@@ -49,7 +50,7 @@ body {
       width: 100%;
 
       &::placeholder {
-        color: $black;
+        color: rgba($darker-grey, .8);
       }
       &::-ms-clear {
         display: none;
@@ -59,6 +60,17 @@ body {
       &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px $orange inset;
       }
+    }
+
+    &-submit {
+      width: rem(24);
+      height: rem(24);
+      position: absolute;
+      top: rem(14);
+      left: rem(14);
+      cursor: pointer;
+      background: transparent;
+      border: none;
     }
   }
 }
