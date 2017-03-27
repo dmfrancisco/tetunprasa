@@ -413,7 +413,7 @@ body {
   }
 
   // Hide because of infinite scrolling
-  body.js & {
+  html.js & {
     display: none;
   }
 }

@@ -6,7 +6,7 @@ var Sheet;
 var Marker;
 
 $(document).ready(function () {
-  $("body").addClass("js");
+  $("html").addClass("js");
 
   Sheet = {
     show: function () {
