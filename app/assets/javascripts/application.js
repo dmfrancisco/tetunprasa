@@ -42,7 +42,7 @@ $(document).ready(function () {
     var url = $('.pagination .next a').attr('href');
 
     if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 200) {
-      $('pagination').html();
+      $('pagination').text('');
       $.getScript(url);
     }
   });
