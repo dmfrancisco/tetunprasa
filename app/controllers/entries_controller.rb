@@ -49,11 +49,14 @@ class EntriesController < ApplicationController
     Example.solr_search do
       fulltext clean_search_query(params[:buka])
       paginate page: 1, per_page: 5 # Show the 5 most relevant
-    end.results
+    end
   end
 
   def intro_examples
-    Example.order("random()").limit(5)
+    Example.solr_search do
+      order_by :random
+      paginate page: 1, per_page: 5
+    end
   end
 
   def permitted_params
