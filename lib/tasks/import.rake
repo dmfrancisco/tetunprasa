@@ -20,13 +20,13 @@ namespace :app do
           DitDictionaryParser.new(html_source).parse.each do |data|
             next if data.glossary_english.blank? && data.variants.empty? && data.subentries.empty?
 
-            entry = Entry.new data.to_h.except(:subentries, :examples)
+            entry = Entry.new data.to_h.except(:subentries, :examples).merge(pid: pid)
             data.examples.each do |tetun, english|
               entry.examples << Example.find_or_initialize_by(tetun: tetun, english: english)
             end
 
             subentries = data.subentries.map do |data|
-              Entry.new(data.to_h.except(:subentries, :examples)).tap do |subentry|
+              Entry.new(data.to_h.except(:subentries, :examples).merge(pid: pid)).tap do |subentry|
                 data.examples.each do |tetun, english|
                   subentry.examples << Example.find_or_initialize_by(tetun: tetun, english: english)
                 end
@@ -42,6 +42,13 @@ namespace :app do
       # Update search indexes
       Entry.reindex
       Example.reindex
+    end
+
+    # Sequential ID that we use internally for the related entries feature
+    # This method increments a global counter
+    def pid
+      $pid ||= 0
+      $pid += 1
     end
   end
 end

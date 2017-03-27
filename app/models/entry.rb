@@ -29,14 +29,16 @@ class Entry < ApplicationRecord
   # @return [String] A short ID that can be used in the public UI
   def related_to_ref(type)
     type_index = RELATED_TYPES.index(type)
-    $hashids.encode(id, type_index)
+    $hashids.encode(pid, type_index)
   end
 
   # @return [Array] List of related entries given a short ID
   def self.related_from_ref(short_id)
-    id, type_index = $hashids.decode(short_id)
+    pid, type_index = $hashids.decode(short_id)
     related_type = RELATED_TYPES[type_index]
-    Entry.find(id).send(related_type)
+    Entry.find_by(pid: pid).send(related_type)
+  rescue
+    # In case the user provided an invalid `short_id`
   end
 
   private

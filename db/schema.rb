@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325211535) do
+ActiveRecord::Schema.define(version: 20170327203151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,7 +65,9 @@ ActiveRecord::Schema.define(version: 20170325211535) do
     t.string  "counterpart",                     array: true
     t.string  "cross_references",                array: true
     t.string  "variants",                        array: true
+    t.integer "pid",                null: false
     t.index ["parent_id"], name: "index_entries_on_parent_id", using: :btree
+    t.index ["pid"], name: "index_entries_on_pid", unique: true, using: :btree
   end
 
   create_table "entries_examples", id: false, force: :cascade do |t|
