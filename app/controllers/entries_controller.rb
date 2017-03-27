@@ -22,15 +22,17 @@ class EntriesController < ApplicationController
   def search
     Entry.solr_search do
       fulltext clean_search_query(params[:buka])
+      order_by :score, :desc
+      order_by :name_for_order, :asc
       group(:name) { limit 20 } # Up to 20 homonyms should be more than sufficient
-      paginate page: params[:page], per_page: Entry::PER_PAGE
+      paginate cursor: params[:page], per_page: Entry::PER_PAGE
     end
   end
 
   def browse
     Entry.solr_search do
       with :letter, active_letter
-      order_by :name_for_order
+      order_by :name_for_order, :asc
       group(:name) { limit 20 }
       with :is_subentry, false # Only show top level entries
       paginate page: params[:page], per_page: Entry::PER_PAGE
@@ -40,6 +42,7 @@ class EntriesController < ApplicationController
   def related
     Entry.solr_search do
       with :name, Entry.related_from_ref(params[:konsulta])
+      order_by :name_for_order, :asc
       group(:name) { limit 20 }
       paginate page: 1, per_page: 50 # Should be sufficient to show all
     end
