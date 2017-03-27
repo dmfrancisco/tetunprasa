@@ -51,12 +51,12 @@ $(document).ready(function () {
   Marker = {
     mark: function () {
       var keyword = $("input[name='buka']").val().replace(/\"/g, '');
-      var $results = $("#results");
+      var $entries = $("#entries");
 
-      if ($results.find(".Entry--empty").length == 0) {
-        $results.unmark({
+      if ($entries.find(".Entry--empty").length == 0) {
+        $entries.unmark({
           done: function() {
-            $("#results").mark(keyword);
+            $("#entries").mark(keyword);
           }
         });
       }

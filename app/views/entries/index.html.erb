@@ -49,11 +49,11 @@
       </div>
     </div>
 
-    <div id="results">
-      <%= render "results", results: results, use_anchor: true %>
+    <div id="entries">
+      <%= render "entries", entries: entries, use_anchor: true %>
     </div>
 
-    <%= render "pagination", results: results %>
+    <%= render "pagination", entries: entries %>
   </div>
 
   <div class="Container-footer">
@@ -75,7 +75,7 @@
 
   <div id="related">
     <% if related %>
-      <%= render "results", results: related %>
+      <%= render "entries", entries: related %>
     <% end %>
   </div>
 </div>

@@ -13,7 +13,7 @@ class EntriesController < ApplicationController
 
   def data
     {
-      results: params[:buka].present? ? search : browse,
+      entries: params[:buka].present? ? search : browse,
       related: params[:konsulta].present? ? related : nil,
       examples: params[:buka].present? ? search_examples : intro_examples
     }
