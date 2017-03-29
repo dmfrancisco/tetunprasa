@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  root 'entries#index'
+  root 'dictionary#index'
 end

@@ -1,9 +1,9 @@
 // Update the side sheet
 <% if related %>
-  $("#related").html("<%= escape_javascript render('entries', terms: related, use_anchor: false) %>");
+  $("#related").html("<%= escape_javascript render('terms', terms: related, use_anchor: false) %>");
   Sheet.show();
 <% elsif params[:page].to_i > 1 %>
-  $("#entries").append("<%= escape_javascript render('entries', terms: terms, use_anchor: true) %>");
+  $("#entries").append("<%= escape_javascript render('terms', terms: terms, use_anchor: true) %>");
   $(".pagination").replaceWith("<%= escape_javascript render('pagination', terms: terms) %>");
   Marker.mark();
 <% end %>

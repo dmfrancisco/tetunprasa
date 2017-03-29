@@ -50,7 +50,7 @@
     </div>
 
     <div id="entries">
-      <%= render "entries", terms: terms, use_anchor: true %>
+      <%= render "terms", terms: terms, use_anchor: true %>
     </div>
 
     <%= render "pagination", terms: terms %>
@@ -75,7 +75,7 @@
 
   <div id="related">
     <% if related %>
-      <%= render "entries", terms: related, use_anchor: false %>
+      <%= render "terms", terms: related, use_anchor: false %>
     <% end %>
   </div>
 </div>

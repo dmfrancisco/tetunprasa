@@ -1,4 +1,4 @@
-class EntriesController < ApplicationController
+class DictionaryController < ApplicationController
   helper_method :permitted_params
   helper_method :active_letter
 
