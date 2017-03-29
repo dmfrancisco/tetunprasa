@@ -25,7 +25,7 @@ class EntriesController < ApplicationController
       order_by :score, :desc
       order_by :name_for_order, :asc
       group(:name) { limit 20 } # Up to 20 homonyms should be more than sufficient
-      paginate cursor: params[:page], per_page: Entry::PER_PAGE
+      paginate page: params[:page], per_page: Entry::PER_PAGE
     end
   end
 
