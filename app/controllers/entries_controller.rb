@@ -13,37 +13,34 @@ class EntriesController < ApplicationController
 
   def data
     {
-      entries: params[:buka].present? ? search : browse,
+      terms: params[:buka].present? ? search : browse,
       related: params[:konsulta].present? ? related : nil,
       examples: params[:buka].present? ? search_examples : intro_examples
     }
   end
 
   def search
-    Entry.solr_search do
+    Term.solr_search(include: { entries: [:subentries, :examples] }) do
       fulltext clean_search_query(params[:buka])
       order_by :score, :desc
       order_by :name_for_order, :asc
-      group(:name) { limit 20 } # Up to 20 homonyms should be more than sufficient
-      paginate page: params[:page], per_page: Entry::PER_PAGE
+      paginate page: params[:page], per_page: Term::PER_PAGE
     end
   end
 
   def browse
-    Entry.solr_search do
+    Term.solr_search(include: { entries: [:subentries, :examples] }) do
       with :letter, active_letter
       order_by :name_for_order, :asc
-      group(:name) { limit 20 }
       with :is_subentry, false # Only show top level entries
-      paginate page: params[:page], per_page: Entry::PER_PAGE
+      paginate page: params[:page], per_page: Term::PER_PAGE
     end
   end
 
   def related
-    Entry.solr_search do
+    Term.solr_search(include: { entries: [:subentries, :examples] }) do
       with :name, Entry.related_from_ref(params[:konsulta])
       order_by :name_for_order, :asc
-      group(:name) { limit 20 }
       paginate page: 1, per_page: 50 # Should be sufficient to show all
     end
   end
@@ -67,7 +64,7 @@ class EntriesController < ApplicationController
   end
 
   def active_letter
-    Entry::ALPHABET.include?(params[:letra]) ? params[:letra] : 'A'
+    Term::ALPHABET.include?(params[:letra]) ? params[:letra] : 'A'
   end
 
   def clean_search_query(query)

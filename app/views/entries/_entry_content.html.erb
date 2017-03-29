@@ -1,5 +1,5 @@
 <% params = permitted_params.permit(:anchor, :letra, :buka, :konsulta) %>
-<% params = params.merge(anchor: group.value.parameterize) if use_anchor %>
+<% params = params.merge(anchor: entry.term.slug) if use_anchor %>
 
 <% if entry.part_of_speech? %>
   <span class="Entry-partOfSpeech u-xspr">

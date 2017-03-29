@@ -15,7 +15,6 @@ class DitDictionaryParser
 
     nodes.each do |node|
       new_entry = OpenStruct.new({
-        letter: parse_letter,
         subentries: [],
         antonyms: [],
         synonyms: [],
@@ -217,11 +216,6 @@ class DitDictionaryParser
 
     raise Disionariu::ParsingError, "Entry with no name: #{ parent_node }" unless entry.name
     return entry
-  end
-
-  # @return [String] Letter of the alphabet this file is about
-  def parse_letter
-    @page.at('.lpTitlePara').text.first
   end
 
   # Utility method that removes trailing whitespace and punctuation

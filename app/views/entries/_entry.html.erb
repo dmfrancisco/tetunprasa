@@ -1,12 +1,13 @@
-<%= render "entry_content", group: group, entry: entry, use_anchor: use_anchor %>
+<%= render "entry_content", entry: entry, use_anchor: use_anchor %>
 
 <% if entry.subentries.any? %>
   <ul class="Entry-subentries">
-    <% entry.subentries.order(:name).each do |subentry| %>
+    <%# This order garantees that subentries with the same name are shown next to each other %>
+    <% entry.subentries.order(:term_id).each do |subentry| %>
       <li>
-        <strong class="Entry-subtitle u-xspr"><%= subentry.name %></strong>
+        <strong class="Entry-subtitle u-xspr"><%= subentry.term.name %></strong>
 
-        <%= render "entry_content", group: group, entry: subentry, use_anchor: use_anchor %>
+        <%= render "entry_content", entry: subentry, use_anchor: use_anchor %>
       </li>
     <% end %>
   </ul>

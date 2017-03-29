@@ -10,6 +10,7 @@ namespace :app do
 
       ActiveRecord::Base.transaction do
         puts 'Destroying all the existing entries and examples...'
+        Term.destroy_all
         Entry.destroy_all
         Example.destroy_all
 
@@ -20,17 +21,21 @@ namespace :app do
           DitDictionaryParser.new(html_source).parse.each do |data|
             next if data.glossary_english.blank? && data.variants.empty? && data.subentries.empty?
 
-            entry = Entry.new data.to_h.except(:subentries, :examples).merge(pid: pid)
+            entry = Entry.new data.to_h.except(:subentries, :examples, :name).merge(pid: pid)
+            entry.term = Term.find_or_create_by(name: data.name)
+
             data.examples.each do |tetun, english|
               entry.examples << Example.find_or_initialize_by(tetun: tetun, english: english)
             end
 
             subentries = data.subentries.map do |data|
-              Entry.new(data.to_h.except(:subentries, :examples).merge(pid: pid)).tap do |subentry|
-                data.examples.each do |tetun, english|
-                  subentry.examples << Example.find_or_initialize_by(tetun: tetun, english: english)
-                end
+              subentry = Entry.new(data.to_h.except(:subentries, :examples, :name).merge(pid: pid))
+              subentry.term = Term.find_or_create_by(name: data.name)
+
+              data.examples.each do |tetun, english|
+                subentry.examples << Example.find_or_create_by(tetun: tetun, english: english)
               end
+              subentry
             end
 
             entry.subentries = subentries.reject { |s| s.glossary_english.blank? && s.variants.empty? }
@@ -40,7 +45,7 @@ namespace :app do
       end
 
       # Update search indexes
-      Entry.reindex
+      Term.reindex
       Example.reindex
     end
 

@@ -1,30 +1,13 @@
 class Entry < ApplicationRecord
-  extend FriendlyId
-
-  ALPHABET = ('A'..'Z').to_a - ['C', 'Q', 'W', 'Y']
   RELATED_TYPES = [ :similar, :synonyms, :antonyms, :male_counterpart,
     :female_counterpart, :counterpart, :variants, :cross_references ]
-  PER_PAGE = 50
 
+  belongs_to :term, required: true
   belongs_to :parent, class_name: 'Entry', foreign_key: 'parent_id'
   has_many :subentries, class_name: 'Entry', foreign_key: 'parent_id'
   has_and_belongs_to_many :examples, uniq: true
 
-  friendly_id :slug_candidates, use: :slugged
-
-  searchable do
-    string :letter
-    string :name
-
-    text :name
-    text :glossary_english
-    text :info
-    text(:examples) { |e| e.examples.map { |ex| [ ex.tetun, ex.english ] }.flatten.join("; ") }
-
-    # Fields for grouping and sorting
-    string(:name_for_order) { |e| I18n.transliterate(e.name).downcase.sub(/^\-/, '') }
-    boolean(:is_subentry) { |e| e.parent_id.present? }
-  end
+  after_save :reindex_term
 
   # @return [String] A short ID that can be used in the public UI
   def related_to_ref(type)
@@ -43,13 +26,7 @@ class Entry < ApplicationRecord
 
   private
 
-  def slug_candidates
-    [:name, :name_and_sequence]
-  end
-
-  def name_and_sequence
-    slug = name.to_param
-    sequence = Entry.where("slug like '#{slug}--%'").count + 2
-    "#{slug}-#{sequence}"
+  def reindex_term
+    Sunspot.index(term)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327203151) do
+ActiveRecord::Schema.define(version: 20170328211211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,9 +48,6 @@ ActiveRecord::Schema.define(version: 20170327203151) do
 
   create_table "entries", force: :cascade do |t|
     t.integer "parent_id"
-    t.string  "slug",               null: false
-    t.string  "name",               null: false
-    t.string  "letter",             null: false
     t.text    "glossary_english"
     t.text    "info"
     t.string  "male_counterpart"
@@ -66,8 +63,10 @@ ActiveRecord::Schema.define(version: 20170327203151) do
     t.string  "cross_references",                array: true
     t.string  "variants",                        array: true
     t.integer "pid",                null: false
+    t.integer "term_id",            null: false
     t.index ["parent_id"], name: "index_entries_on_parent_id", using: :btree
     t.index ["pid"], name: "index_entries_on_pid", unique: true, using: :btree
+    t.index ["term_id"], name: "index_entries_on_term_id", using: :btree
   end
 
   create_table "entries_examples", id: false, force: :cascade do |t|
@@ -83,6 +82,15 @@ ActiveRecord::Schema.define(version: 20170327203151) do
     t.string   "english",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "terms", force: :cascade do |t|
+    t.string   "slug",       null: false
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_terms_on_name", unique: true, using: :btree
+    t.index ["slug"], name: "index_terms_on_slug", unique: true, using: :btree
   end
 
 end

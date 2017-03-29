@@ -40,7 +40,7 @@
     </h2>
 
     <div class="Alfabetu">
-      <% Entry::ALPHABET.each do |letter| %>
+      <% Term::ALPHABET.each do |letter| %>
         <%= link_to letter, { letra: letter },
           class: "Alfabetu-letra #{ (params[:buka].blank? && active_letter == letter) ? 'is-active' : '' }" %>
       <% end %>
@@ -50,10 +50,10 @@
     </div>
 
     <div id="entries">
-      <%= render "entries", entries: entries, use_anchor: true %>
+      <%= render "entries", terms: terms, use_anchor: true %>
     </div>
 
-    <%= render "pagination", entries: entries %>
+    <%= render "pagination", terms: terms %>
   </div>
 
   <div class="Container-footer">
@@ -75,7 +75,7 @@
 
   <div id="related">
     <% if related %>
-      <%= render "entries", entries: related, use_anchor: false %>
+      <%= render "entries", terms: related, use_anchor: false %>
     <% end %>
   </div>
 </div>

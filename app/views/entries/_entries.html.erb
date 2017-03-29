@@ -1,30 +1,30 @@
-<% if entries.group(:name).matches.zero? %>
+<% if terms.results.empty? %>
   <div class="Entry Entry--empty">
     Sorry, no results were found.
   </div>
 <% else %>
-  <% entries.group(:name).groups.each do |group| %>
+  <% terms.results.each do |term| %>
     <% if use_anchor %>
-      <div id="<%= group.value.parameterize %>" class="u-anchor"></div>
+      <div id="<%= term.slug %>" class="u-anchor"></div>
     <% end %>
 
     <div class="Entry">
       <h3 class="Entry-title">
-        <%= group.value %>
+        <%= term.name %>
       </h3>
 
-      <% if group.results.count > 1 %>
+      <% if term.entries.count > 1 %>
         <ol class="Entry-list">
-          <% group.results.each do |entry| %>
+          <% term.entries.each do |entry| %>
             <li>
               <div class="Entry-list-item">
-                <%= render "entry", group: group, entry: entry, use_anchor: use_anchor %>
+                <%= render "entry", entry: entry, use_anchor: use_anchor %>
               </div>
             </li>
           <% end %>
         </ol>
       <% else %>
-        <%= render "entry", group: group, entry: group.results.first, use_anchor: use_anchor %>
+        <%= render "entry", entry: term.entries.first, use_anchor: use_anchor %>
       <% end %>
     </div>
   <% end %>
