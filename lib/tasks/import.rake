@@ -5,7 +5,7 @@ namespace :app do
     desc 'Import data from DIT (Dili Institute of Technology) Tetun-English dictionary'
     task 'dit_dictionary', [ :pattern ] => :environment do |t, args|
       if args[:pattern].blank?
-        pattern = Rails.root.join('lexicon/**/*.htm')
+        pattern = Rails.root.join('dit/lexicon/**/*.htm')
       end
 
       ActiveRecord::Base.transaction do
