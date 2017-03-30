@@ -33,7 +33,8 @@ end
 gem 'autoprefixer-rails'
 gem 'hashids'
 gem 'kaminari'
-gem 'nokogiri'
+gem 'nokogiri', require: false
+gem 'google-cloud-translate', require: false
 
 group :development, :test do
   gem 'dotenv-rails' # Shim to load environment variables from .env into ENV in development

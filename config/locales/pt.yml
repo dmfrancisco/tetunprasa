@@ -1,0 +1,35 @@
+pt:
+  dictionary:
+    index:
+      definitions: Definições
+      examples: Exemplos
+      related: Relacionado
+    promo:
+      title: Escreva palavras em português ou tétum para encontrar definições e frases comuns.
+      description: >
+        Este sítio foi possível graças a várias fontes de dados abertos.
+        Não é abrangente e pode conter erros, mas é ainda assim
+        valioso na aprendizagem do Tétum-Prasa.
+    terms:
+      none_found: Não foram encontrados resultados para a sua pesquisa.
+    examples:
+      none_found: Não foram encontrados exemplos.
+    footer:
+      attribution_html: >
+        A informação apresentada foi produzida por Catharina Williams-van Klinken e outros
+        pertencentes ao <strong>Dili Institute of Technology’s Language Centre</strong>.
+      disclaimer_html: Esta página não está afiliada com o <em>Dili Institute of Technology</em>.
+
+  activerecord:
+    attributes:
+      entry:
+        similar: Similar
+        synonym: Sinónimo
+        antonym: Antónimo
+        male_counterpart: Masculino
+        female_counterpart: Feminino
+        counterpart: Contraparte
+        variant: Variante
+        see_also: Ver também
+        usage: Utilização
+        from: Origem

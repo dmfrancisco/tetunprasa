@@ -1,12 +1,16 @@
 <% if examples.empty? %>
   <div class="Entry Entry--empty">
-    Sorry, no examples were found.
+    <%= t '.none_found' %>
   </div>
 <% else %>
   <% examples.each do |example| %>
     <div class="Entry">
-      <div class="Entry-examples Entry-examples--tetun u-nom"><%= example.tetun %></div>
-      <div class="Entry-examples Entry-examples--english u-nom"><%= example.english %></div>
+      <div class="Entry-examples Entry-examples--tetun u-nom">
+        <%= example.tetun %>
+      </div>
+      <div class="Entry-examples Entry-examples--english u-nom">
+        <%= example.translation(params[:locale]).html_safe %>
+      </div>
     </div>
   <% end %>
 <% end %>

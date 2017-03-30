@@ -1,34 +1,15 @@
 <% content_for :title, "#{ params[:buka] } / tetunprasa.com" if params[:buka].present? %>
 
-<div class="Topbar">
-  <%= link_to "", root_path, class: "Topbar-lafaek" %>
-
-  <%= form_tag root_path, method: :get, enforce_utf8: false, class: "Topbar-buka" do %>
-    <%= text_field_tag :buka, params[:buka], id: nil, class: "Topbar-buka-input", tabindex: "1",
-       placeholder: "Buka", autocapitalize: "off", autocorrect: "off", spellcheck: "false" %>
-
-    <%= submit_tag "", class: "Topbar-buka-submit", name: "" %>
-  <% end %>
-</div>
+<%= render "topbar" %>
 
 <div class="Container">
   <% unless params[:buka].present? %>
-    <div id="promo" class="Container-prinsipal Container-promo" data-turbolinks-permanent>
-      <h1 class="Container-promo-titulu">
-        Type words in english or tetun and get definitions and common phrases.
-      </h1>
-      <p class="Container-promo-details">
-        This tool was built using various open data sources.
-        It is not comprehensive and may contain errors, but may still be
-        valuable to speak and learn tetun-prasa.
-      </p>
-      <%= link_to "✕", "#", id: "promo-close", class: "Container-promo-close" %>
-    </div>
+    <%= render "promo" %>
   <% end %>
 
   <div class="Container-sekundariu">
     <h2 class="Container-titulu">
-      Examples
+      <%= t '.examples' %>
     </h2>
 
     <%= render "examples", examples: examples.results %>
@@ -36,7 +17,7 @@
 
   <div class="Container-prinsipal">
     <h2 class="Container-titulu">
-      Definitions
+      <%= t '.definitions' %>
     </h2>
 
     <div class="Alfabetu">
@@ -56,20 +37,14 @@
     <%= render "pagination", terms: terms %>
   </div>
 
-  <div class="Container-footer">
-    <a class="Container-footer-link" href="http://www.tetundit.tl/">
-      Dictionary definitions and examples produced by Catharina Williams-van Klinken
-      and others from <strong>Dili Institute of Technology’s Language Centre</strong>.
-    </a>
-    <span class="Container-footer-nota">
-      This page is not affiliated with the Dili Institute of Technology.
-    </span>
-  </div>
+  <%= render "footer" %>
 </div>
 
 <div id="sheet" class="Sheet animated" style="<%= related ? '' : 'display:none' %>" data-turbolinks-permanent>
   <div class="Sheet-header">
-    <h2 class="Sheet-titulu">Related</h2>
+    <h2 class="Sheet-titulu">
+      <%= t '.related' %>
+    </h2>
     <%= link_to "✕", permitted_params.merge(konsulta: nil), id: "close", class: "Sheet-close" %>
   </div>
 

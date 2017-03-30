@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  root 'dictionary#index'
+  scope "(:locale)", locale: /pt/ do
+    root 'dictionary#index'
+  end
 end

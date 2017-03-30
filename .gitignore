@@ -25,6 +25,7 @@
 
 # Credentials and other sensitive information.
 .env
+google_app_credentials.json
 
 # Others.
 /dit

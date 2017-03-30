@@ -19,7 +19,7 @@ namespace :app do
           html_source = File.read(filename)
 
           DitDictionaryParser.new(html_source).parse.each do |data|
-            next if data.glossary_english.blank? && data.variants.empty? && data.subentries.empty?
+            next if data.glossary_en.blank? && data.variants.empty? && data.subentries.empty?
 
             entry = Entry.new data.to_h.except(:subentries, :examples, :name).merge(pid: pid)
             entry.term = Term.find_or_create_by(name: data.name)
@@ -38,7 +38,7 @@ namespace :app do
               subentry
             end
 
-            entry.subentries = subentries.reject { |s| s.glossary_english.blank? && s.variants.empty? }
+            entry.subentries = subentries.reject { |s| s.glossary_en.blank? && s.variants.empty? }
             entry.save!
           end
         end

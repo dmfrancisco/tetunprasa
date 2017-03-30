@@ -5,4 +5,11 @@ class Example < ApplicationRecord
     text :tetun
     text :english
   end
+
+  validates :tetun, :english, :portuguese, presence: true
+
+  # Gives the translation based on the given locale
+  def translation(locale)
+    locale == 'pt' ? portuguese : english
+  end
 end

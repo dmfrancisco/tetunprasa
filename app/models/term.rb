@@ -16,11 +16,17 @@ class Term < ApplicationRecord
 
     # For full-text search
     text :name
-    text :glossary_english do |t|
-      t.entries.map(&:glossary_english).join(". ")
+    text :glossary_en do |t|
+      t.entries.map(&:glossary_en).join(". ")
     end
-    text :info do |t|
-      t.entries.map(&:info).join(". ")
+    text :glossary_pt do |t|
+      t.entries.map(&:glossary_pt).join(". ")
+    end
+    text :info_en do |t|
+      t.entries.map(&:info_en).join(". ")
+    end
+    text :info_pt do |t|
+      t.entries.map(&:info_pt).join(". ")
     end
     text :examples do |t|
       t.entries.map do |e|

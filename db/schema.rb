@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328211211) do
+ActiveRecord::Schema.define(version: 20170330202337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 20170328211211) do
 
   create_table "entries", force: :cascade do |t|
     t.integer "parent_id"
-    t.text    "glossary_english"
-    t.text    "info"
+    t.text    "glossary_en"
+    t.text    "info_en"
     t.string  "male_counterpart"
     t.string  "female_counterpart"
     t.string  "part_of_speech"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 20170328211211) do
     t.string  "variants",                        array: true
     t.integer "pid",                null: false
     t.integer "term_id",            null: false
+    t.text    "glossary_pt"
+    t.text    "info_pt"
     t.index ["parent_id"], name: "index_entries_on_parent_id", using: :btree
     t.index ["pid"], name: "index_entries_on_pid", unique: true, using: :btree
     t.index ["term_id"], name: "index_entries_on_term_id", using: :btree
@@ -82,6 +84,7 @@ ActiveRecord::Schema.define(version: 20170328211211) do
     t.string   "english",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "portuguese"
   end
 
   create_table "terms", force: :cascade do |t|

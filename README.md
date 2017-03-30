@@ -76,3 +76,34 @@ ufw allow www
 ufw deny 8080/tcp
 ufw enable
 ```
+
+### Importing and translating the data
+
+#### Import from the DIT (Dili Institute of Technology) Tetun-English dictionary
+
+Download the [ZIP file](http://www.tetundit.tl/Publications/DIT%20Tetun%20-%20English%20Lexicon.zip)
+from the [institute's website](http://www.tetundit.tl/) and extract it in the
+root of the project with the name `dit`. Finally, run the following rake task:
+
+```shell
+rake app:import:dit_dictionary
+```
+
+#### Translate the entries and examples
+
+Download the credentials file from your [Google console](https://console.cloud.google.com/)
+and specify the keys in the `.env` file:
+
+```shell
+export GOOGLE_PROJECT_NAME="..."
+export GOOGLE_APPLICATION_CREDENTIALS="..."
+```
+
+Make sure your billing is correct, otherwise you may end up with permission issues.
+Then run the following rake tasks:
+
+```shell
+rake app:translate:entries_glossary
+rake app:translate:entries_info
+rake app:translate:examples
+```

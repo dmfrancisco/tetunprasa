@@ -1,4 +1,5 @@
 require 'ostruct'
+require 'nokogiri'
 
 # Parse data from the DIT (Dili Institute of Technology) Tetun-English interactive dictionary
 # You can download it here: https://goo.gl/deIvag
@@ -80,8 +81,8 @@ class DitDictionaryParser
         raise Disionariu::ParsingError, "Node `name` was already set." if entry.name
         entry.name = clean(node.text)
       when 'lpGlossEnglish'
-        if !entry.glossary_english
-          entry.glossary_english = clean(node.text) unless ['’', '‘'].include? node.text
+        if !entry.glossary_en
+          entry.glossary_en = clean(node.text) unless ['’', '‘'].include? node.text
         else
           # If this appears again, it's the definition of a synonym
           # This is handled below in the `lpExample` case
@@ -110,8 +111,8 @@ class DitDictionaryParser
           context = clean(node.text)
         end
       when 'lpEncycInfoEnglish'
-        raise Disionariu::ParsingError, "Node `info` was already set." if entry.info
-        entry.info = clean(node.text)
+        raise Disionariu::ParsingError, "Node `info_en` was already set." if entry.info_en
+        entry.info_en = clean(node.text)
       when 'lpLexicalFunction'
         if context.nil?
           puts "Node `lexical_function` defined out of context."
@@ -184,6 +185,17 @@ class DitDictionaryParser
               "Malay", "Makassae", "Mambae", "Malayalam"
             origin
           else
+            # The following uncommon occurrences are currently discarded:
+            # - Acronym
+            # - Arabic
+            # - Arabic via Malay
+            # - Brand name
+            # - Indon calque
+            # - Indon from Chinese
+            # - Indon from English
+            # - Port + Tetun
+            # - Port Acronym
+            # - Port from Japanese
             nil
           end
         end

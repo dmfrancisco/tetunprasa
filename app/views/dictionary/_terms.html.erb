@@ -1,6 +1,6 @@
 <% if terms.results.empty? %>
   <div class="Entry Entry--empty">
-    Sorry, no results were found.
+    <%= t '.none_found' %>
   </div>
 <% else %>
   <% terms.results.each do |term| %>

@@ -24,6 +24,15 @@ class Entry < ApplicationRecord
     # In case the user provided an invalid `short_id`
   end
 
+  # Appends `_en` or `_pt` to the field according to a given locale
+  def translated(field, locale)
+    if locale == 'pt'
+      send("#{ field }_pt")
+    else
+      send("#{ field }_en")
+    end
+  end
+
   private
 
   def reindex_term

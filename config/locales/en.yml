@@ -1,23 +1,35 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  dictionary:
+    index:
+      definitions: Definitions
+      examples: Examples
+      related: Related
+    promo:
+      title: Type words in english or tetun and get definitions and common phrases.
+      description: >
+        This tool was built using various open data sources.
+        It is not comprehensive and may contain errors, but may still be
+        valuable to speak and learn tetun-prasa.
+    terms:
+      none_found: Sorry, no results were found.
+    examples:
+      none_found: Sorry, no examples were found.
+    footer:
+      attribution_html: >
+        Dictionary definitions and examples produced by Catharina Williams-van Klinken
+        and others from <strong>Dili Institute of Technology’s Language Centre</strong>.
+      disclaimer_html: This page is not affiliated with the Dili Institute of Technology.
+
+  activerecord:
+    attributes:
+      entry:
+        similar: Similar
+        synonym: Synonym
+        antonym: Antonym
+        male_counterpart: Male counterpart
+        female_counterpart: Female counterpart
+        counterpart: Counterpart
+        variant: Variant
+        see_also: See also
+        usage: Usage
+        from: From
