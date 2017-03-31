@@ -24,27 +24,40 @@ class Entry < ApplicationRecord
     # In case the user provided an invalid `short_id`
   end
 
-  # Appends `_en` or `_pt` to the field according to a given locale
-  def translated(field, locale)
-    if locale == 'pt'
-      send("#{ field }_pt")
+  def glossary
+    I18n.locale == :pt ? glossary_pt : glossary_en
+  end
+
+  def info
+    I18n.locale == :pt ? info_pt : info_en
+  end
+
+  def origin_en
+    read_attribute :origin
+  end
+
+  def origin
+    I18n.locale == :pt ? origin_en.map { |o| I18n.t("origin.#{ o }") } : origin_en
+  end
+
+  def part_of_speech_en
+    read_attribute :part_of_speech
+  end
+
+  def part_of_speech
+    if I18n.locale == :pt
+      part_of_speech_en.map { |ps| I18n.t("part_of_speech.#{ ps }", default: ps) }
     else
-      send("#{ field }_en")
+      part_of_speech_en
     end
   end
 
-  def translated_origin(locale)
-    origin.map { |o| locale == 'pt' ? I18n.t("origin.#{ o }") : o }
+  def usage_en
+    read_attribute :usage
   end
 
-  def translated_part_of_speech(locale)
-    part_of_speech.map do |ps|
-      locale == 'pt' ? I18n.t("part_of_speech.#{ ps }", default: ps) : ps
-    end
-  end
-
-  def translated_usage(locale)
-    usage.map { |u| locale == 'pt' ? I18n.t("usage.#{ u }") : u }
+  def usage
+    I18n.locale == :pt ? usage_en.map { |u| I18n.t("usage.#{ u }") } : usage_en
   end
 
   private

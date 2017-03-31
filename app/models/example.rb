@@ -10,7 +10,7 @@ class Example < ApplicationRecord
   validates :tetun, :english, :portuguese, presence: true
 
   # Gives the translation based on the given locale
-  def translation(locale)
-    locale == 'pt' ? portuguese : english
+  def translation
+    I18n.locale == :pt ? portuguese : english
   end
 end

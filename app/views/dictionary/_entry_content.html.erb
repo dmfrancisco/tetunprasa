@@ -3,19 +3,19 @@
 
 <% if entry.part_of_speech.any? %>
   <span class="Entry-partOfSpeech u-xspr">
-    <em><%= entry.translated_part_of_speech(params[:locale]).join(" ") %></em>
+    <em><%= entry.part_of_speech.join(" ") %></em>
   </span>
 <% end %>
 
-<% if entry.translated(:glossary, params[:locale]).present? %>
+<% if entry.glossary.present? %>
   <span class="Entry-glossary u-xspr">
-    <%= entry.translated(:glossary, params[:locale]).html_safe %>
+    <%= entry.glossary.html_safe %>
   </span>
 <% end %>
 
-<% if entry.translated(:info, params[:locale]).present? %>
+<% if entry.info.present? %>
   <span class="Entry-glossary u-xspr">
-    <em><%= entry.translated(:info, params[:locale]).html_safe %></em>
+    <em><%= entry.info.html_safe %></em>
   </span>
 <% end %>
 
@@ -85,12 +85,12 @@
 
 <% if entry.usage.any? %>
   <strong class="Entry-label"><%= Entry.human_attribute_name(:usage) %></strong>
-  <span class="u-xspr"><%= entry.translated_usage(params[:locale]).join("; ") %>.</span>
+  <span class="u-xspr"><%= entry.usage.join("; ") %>.</span>
 <% end %>
 
 <% if entry.origin.any? %>
   <strong class="Entry-label"><%= Entry.human_attribute_name(:from) %></strong>
-  <span class="u-xspr"><%= entry.translated_origin(params[:locale]).to_sentence %>.</span>
+  <span class="u-xspr"><%= entry.origin.to_sentence %>.</span>
 <% end %>
 
 <% if entry.examples.any? %>
@@ -99,7 +99,7 @@
       <%= example.tetun %>
     </div>
     <div class="Entry-examples Entry-examples--english">
-      <%= example.translation(params[:locale]).html_safe %>
+      <%= example.translation.html_safe %>
     </div>
   <% end %>
 <% end %>
