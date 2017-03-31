@@ -33,6 +33,10 @@ class Entry < ApplicationRecord
     end
   end
 
+  def translated_origin(locale)
+    origin.map { |o| I18n.t("origin.#{ o }") }
+  end
+
   private
 
   def reindex_term

@@ -90,7 +90,7 @@
 
 <% if entry.origin.any? %>
   <strong class="Entry-label"><%= Entry.human_attribute_name(:from) %></strong>
-  <span class="u-xspr"><%= entry.origin.to_sentence %>.</span>
+  <span class="u-xspr"><%= entry.translated_origin(params[:locale]).to_sentence %>.</span>
 <% end %>
 
 <% if entry.examples.any? %>
