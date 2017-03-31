@@ -28,9 +28,14 @@ class Term < ApplicationRecord
     text :info_pt do |t|
       t.entries.map(&:info_pt).join(". ")
     end
-    text :examples do |t|
+    text :examples_en do |t|
       t.entries.map do |e|
         e.examples.map { |ex| [ ex.tetun, ex.english ] }
+      end.flatten.join(". ")
+    end
+    text :examples_pt do |t|
+      t.entries.map do |e|
+        e.examples.map { |ex| [ ex.tetun, ex.portuguese ] }
       end.flatten.join(". ")
     end
 

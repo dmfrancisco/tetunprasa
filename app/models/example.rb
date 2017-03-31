@@ -4,6 +4,7 @@ class Example < ApplicationRecord
   searchable do
     text :tetun
     text :english
+    text :portuguese
   end
 
   validates :tetun, :english, :portuguese, presence: true

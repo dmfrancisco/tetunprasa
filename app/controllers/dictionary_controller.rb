@@ -21,7 +21,13 @@ class DictionaryController < ApplicationController
 
   def search
     Term.solr_search(include: { entries: [:subentries, :examples] }) do
-      fulltext clean_search_query(params[:buka])
+      fulltext clean_search_query(params[:buka]) do
+        if params[:locale] == 'pt'
+          fields :name, :glossary_pt, :info_pt, :examples_pt
+        else
+          fields :name, :glossary_en, :info_en, :examples_en
+        end
+      end
       order_by :score, :desc
       order_by :name_for_order, :asc
       paginate page: params[:page], per_page: Term::PER_PAGE
@@ -47,7 +53,13 @@ class DictionaryController < ApplicationController
 
   def search_examples
     Example.solr_search do
-      fulltext clean_search_query(params[:buka])
+      fulltext clean_search_query(params[:buka]) do
+        if params[:locale] == 'pt'
+          fields :tetun, :portuguese
+        else
+          fields :tetun, :english
+        end
+      end
       paginate page: 1, per_page: 5 # Show the 5 most relevant
     end
   end
