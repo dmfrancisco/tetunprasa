@@ -34,7 +34,11 @@ class Entry < ApplicationRecord
   end
 
   def translated_origin(locale)
-    origin.map { |o| I18n.t("origin.#{ o }") }
+    origin.map { |o| locale == 'pt' ? I18n.t("origin.#{ o }") : o }
+  end
+
+  def translated_usage(locale)
+    usage.map { |u| locale == 'pt' ? I18n.t("usage.#{ u }") : u }
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330202337) do
+ActiveRecord::Schema.define(version: 20170331203119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,19 +53,19 @@ ActiveRecord::Schema.define(version: 20170330202337) do
     t.string  "male_counterpart"
     t.string  "female_counterpart"
     t.string  "part_of_speech"
-    t.string  "usage"
-    t.string  "origin",                          array: true
-    t.string  "antonyms",                        array: true
-    t.string  "synonyms",                        array: true
-    t.string  "similar",                         array: true
-    t.string  "categories",                      array: true
-    t.string  "counterpart",                     array: true
-    t.string  "cross_references",                array: true
-    t.string  "variants",                        array: true
-    t.integer "pid",                null: false
-    t.integer "term_id",            null: false
+    t.string  "origin",                                       array: true
+    t.string  "antonyms",                                     array: true
+    t.string  "synonyms",                                     array: true
+    t.string  "similar",                                      array: true
+    t.string  "categories",                                   array: true
+    t.string  "counterpart",                                  array: true
+    t.string  "cross_references",                             array: true
+    t.string  "variants",                                     array: true
+    t.integer "pid",                             null: false
+    t.integer "term_id",                         null: false
     t.text    "glossary_pt"
     t.text    "info_pt"
+    t.string  "usage",              default: [], null: false, array: true
     t.index ["parent_id"], name: "index_entries_on_parent_id", using: :btree
     t.index ["pid"], name: "index_entries_on_pid", unique: true, using: :btree
     t.index ["term_id"], name: "index_entries_on_term_id", using: :btree

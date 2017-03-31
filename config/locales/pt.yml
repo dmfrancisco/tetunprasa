@@ -31,7 +31,7 @@ pt:
         counterpart: Contraparte
         variant: Variante
         see_also: Ver também
-        usage: Utilização
+        usage: Uso
         from: Origem
 
   origin:
@@ -46,3 +46,58 @@ pt:
     Makassae: Makassae
     Mambae: Mambai
     Malayalam: Malaiala
+
+  usage:
+    "1999 until 2003": "entre 1999 e 2003"
+    "adat": "adat"
+    "affectionate": "afetuoso"
+    "archaic": "arcaico"
+    "Baucau": "Baucau"
+    "Catholic church": "Igreja Católica"
+    "children": "crianças"
+    "church": "igreja"
+    "common": "comum"
+    "derogatory": "depreciativo"
+    "Dili": "Díli"
+    "disapproving": "reprovado"
+    "disputed": "contestado"
+    "east of East Timor": "este de Timor-Leste"
+    "educated": "educado"
+    "formal": "formal"
+    "impolite": "indelicado"
+    "informal": "informal"
+    "Lospalos": "Lospalos"
+    "mainly adat": "sobretudo adat"
+    "mainly Catholic": "sobretudo Católico"
+    "mainly church": "sobretudo igreja"
+    "mainly east of East Timor": "sobretudo este de Timor-Leste"
+    "mainly formal": "sobretudo formal"
+    "mainly pre-1975": "sobretudo pré-1975"
+    "mainly Tetun Terik": "sobretudo Tétum-Terik"
+    "mainly written": "sobretudo escrito"
+    "media": "media"
+    "medicine": "medicina"
+    "new": "recente"
+    "non-standard": "não padronizado"
+    "non-technical": "não técnico"
+    "not all": "parcial"
+    "offensive": "ofensivo"
+    "official": "oficial"
+    "polite": "delicado"
+    "post-1999": "pós-1999"
+    "pre-1975": "pré-1975"
+    "pre-1999": "pré-1999"
+    "Protestant": "Protestante"
+    "rare": "raro"
+    "rude": "rude"
+    "rural": "rural"
+    "slang": "calão"
+    "south coast of East Timor": "costa sul de Timor-Leste"
+    "speaking": "falado"
+    "swear": "palavrão"
+    "technical": "técnico"
+    "Tetun Terik": "Tétum-Terik"
+    "to children": "a crianças"
+    "uncommon": "incomum"
+    "Viqueque": "Viqueque"
+    "youth": "juventude"

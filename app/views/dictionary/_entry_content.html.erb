@@ -83,9 +83,9 @@
   </span>
 <% end %>
 
-<% if entry.usage.present? %>
+<% if entry.usage.any? %>
   <strong class="Entry-label"><%= Entry.human_attribute_name(:usage) %></strong>
-  <span class="u-xspr"><%= entry.usage %>.</span>
+  <span class="u-xspr"><%= entry.translated_usage(params[:locale]).join("; ") %>.</span>
 <% end %>
 
 <% if entry.origin.any? %>

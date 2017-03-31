@@ -25,6 +25,7 @@ class DitDictionaryParser
         examples: {},
         cross_references: [],
         variants: [],
+        usage: [],
         origin: []
       })
 
@@ -101,7 +102,7 @@ class DitDictionaryParser
         when "Usage"
           gloss_node = nodes[index + 1]
           if gloss_node['class'] == 'lpGlossEnglish'
-            entry.usage = clean(gloss_node.text)
+            entry.usage = self.class.normalize_usage(clean gloss_node.text)
           else
             raise Disionariu::ParsingError,
               "`lpMiniHeading=Usage` is not associated to a `lpGlossEnglish`: #{ node }"
@@ -236,5 +237,58 @@ class DitDictionaryParser
       .gsub(/[[:space:]]/, ' ')
       .strip
       .chomp(':')
+  end
+
+  # Normalizes the `usage` attribute for consistency and simpler translation
+  def self.normalize_usage(usages)
+    usages.split(/\s*[;,]\s/).map do |usage|
+      # Sometimes nil is returned because the case is covered by the `origin` field too
+      case usage
+      when "Baucau Viqueque Lospalos" then ["Baucau", "Viqueque", "Lospalos"]
+      when "Catholic" then "Catholic church" # For consistency
+      when "church formal" then ["church", "formal"]
+      when "church formal TT" then ["church", "formal", "Tetun Terik"]
+      when "church rare" then ["church", "rare"]
+      when "church rural" then ["church", "rural"]
+      when "church TT" then ["church", "Tetun Terik"]
+      when "common English" then "common"
+      when "common Indon" then "common"
+      when "common non-technical" then ["common", "non-technical"]
+      when "east" then "east of East Timor"
+      when "educated formal" then ["educated", "formal"]
+      when "formal church" then ["formal", "church"]
+      when "formal polite" then ["formal", "polite"]
+      when "Indon" then nil
+      when "Indon medicine" then "medicine"
+      when "Indon technical" then "technical"
+      when "IsPort" then nil
+      when "mainly church formal" then ["mainly church", "formal"]
+      when "mainly east" then "mainly east of East Timor"
+      when "mainly TT church" then ["mainly Tetun Terik", "church"]
+      when "mainly TT church formal" then ["mainly Tetun Terik", "church", "formal"]
+      when "media disputed" then ["media", "disputed"]
+      when "new formal" then ["new", "formal"]
+      when "not church" then nil # Only happens once
+      when "not-all" then "not all"
+      when "Port" then nil
+      when "Port and medicine" then "medicine"
+      when "Port medicine" then "medicine"
+      when "Port pre-1975" then "pre-1975"
+      when "Port technical" then "technical"
+      when "post-1999 common English" then ["post-1999", "common"]
+      when "post-1999 media" then ["post-1999", "media"]
+      when "post-1999 medicine" then ["post-1999", "medicine"]
+      when "post-1999 technical" then ["post-1999", "technical"]
+      when "rare children" then ["rare", "children"]
+      when "rare disputed" then ["rare", "disputed"]
+      when "rare TT" then ["rare", "Tetun Terik"]
+      when "Same" then nil # Only happens once
+      when "south.coast" then "south coast of East Timor"
+      when "to-children" then "to children"
+      when "TT" then "Tetun Terik"
+      else
+        usage
+      end
+    end.flatten.compact
   end
 end
