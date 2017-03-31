@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331203119) do
+ActiveRecord::Schema.define(version: 20170331210350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,14 +53,14 @@ ActiveRecord::Schema.define(version: 20170331203119) do
     t.string  "male_counterpart"
     t.string  "female_counterpart"
     t.string  "part_of_speech"
-    t.string  "origin",                                       array: true
-    t.string  "antonyms",                                     array: true
-    t.string  "synonyms",                                     array: true
-    t.string  "similar",                                      array: true
-    t.string  "categories",                                   array: true
-    t.string  "counterpart",                                  array: true
-    t.string  "cross_references",                             array: true
-    t.string  "variants",                                     array: true
+    t.string  "origin",             default: [], null: false, array: true
+    t.string  "antonyms",           default: [], null: false, array: true
+    t.string  "synonyms",           default: [], null: false, array: true
+    t.string  "similar",            default: [], null: false, array: true
+    t.string  "categories",         default: [], null: false, array: true
+    t.string  "counterpart",        default: [], null: false, array: true
+    t.string  "cross_references",   default: [], null: false, array: true
+    t.string  "variants",           default: [], null: false, array: true
     t.integer "pid",                             null: false
     t.integer "term_id",                         null: false
     t.text    "glossary_pt"
