@@ -47,6 +47,17 @@ pt:
     Mambae: Mambai
     Malayalam: Malaiala
 
+  part_of_speech:
+    abbrev: abrev
+    body: corpo
+    clause: condição
+    connector: conector
+    greet: cumprimento
+    pause: pausa
+    saying: provérbio
+    time: tempo
+    title: forma de tratamento
+
   usage:
     "1999 until 2003": "entre 1999 e 2003"
     "adat": "adat"

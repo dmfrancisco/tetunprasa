@@ -1,9 +1,9 @@
 <% query_params = permitted_params.permit(:anchor, :letra, :buka, :konsulta) %>
 <% query_params = query_params.merge(anchor: entry.term.slug) if use_anchor %>
 
-<% if entry.part_of_speech? %>
+<% if entry.part_of_speech.any? %>
   <span class="Entry-partOfSpeech u-xspr">
-    <em><%= entry.part_of_speech %></em>
+    <em><%= entry.translated_part_of_speech(params[:locale]).join(" ") %></em>
   </span>
 <% end %>
 

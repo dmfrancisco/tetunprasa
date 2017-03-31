@@ -94,7 +94,7 @@ class DitDictionaryParser
         # This is whitespace used in the page that is irrelevant here
       when 'lpPartOfSpeech'
         raise Disionariu::ParsingError, "Node `part_of_speech` was already set." if entry.part_of_speech
-        entry.part_of_speech = clean(node.text)
+        entry.part_of_speech = self.class.normalize_part_of_speech(clean node.text)
       when 'lpCategory'
         entry.categories << clean(node.text) if node.text.present?
       when 'lpMiniHeading'
@@ -237,6 +237,11 @@ class DitDictionaryParser
       .gsub(/[[:space:]]/, ' ')
       .strip
       .chomp(':')
+  end
+
+  # Normalizes the `part_of_speech` attribute for consistency and simpler translation
+  def self.normalize_part_of_speech(part_of_speech)
+    part_of_speech.chomp('.').split(/[\s;,]/)
   end
 
   # Normalizes the `usage` attribute for consistency and simpler translation

@@ -37,6 +37,12 @@ class Entry < ApplicationRecord
     origin.map { |o| locale == 'pt' ? I18n.t("origin.#{ o }") : o }
   end
 
+  def translated_part_of_speech(locale)
+    part_of_speech.map do |ps|
+      locale == 'pt' ? I18n.t("part_of_speech.#{ ps }", default: ps) : ps
+    end
+  end
+
   def translated_usage(locale)
     usage.map { |u| locale == 'pt' ? I18n.t("usage.#{ u }") : u }
   end
