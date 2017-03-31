@@ -47,6 +47,14 @@ $(document).ready(function () {
     }
   });
 
+  // Modern browsers seem to keep the input value when the user hits back
+  // This makes it seem the input value and search results don't match
+  // It may also result in content being highlighted because of the `mark()` below
+  if (typeof URLSearchParams !== "undefined") {
+    var params = new URLSearchParams(window.location.search);
+    $("input[name='buka']").val(params.get('buka'));
+  }
+
   // Highlight matches
   Marker = {
     mark: function () {
