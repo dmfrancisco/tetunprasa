@@ -26,15 +26,9 @@ $(document).ready(function () {
   }
 
   // Hide side sheet on click
-  $(document).on("click", "#close", function (e) {
+  $(document).on("click", "#sheet-close", function (e) {
     e.preventDefault();
     Sheet.hide();
-  });
-
-  // Hide promo on click
-  $(document).on("click", "#promo-close", function (e) {
-    e.preventDefault();
-    $("#promo").hide();
   });
 
   // Hide an element on click
