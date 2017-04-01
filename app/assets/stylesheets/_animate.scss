@@ -1,9 +1,5 @@
 /* Animations based on https://github.com/daneden/animate.css */
 
-.animated {
-  animation-fill-mode: both;
-}
-
 @keyframes slideInRight {
   from {
     transform: translate3d(100%, 0, 0);
@@ -15,11 +11,6 @@
   }
 }
 
-.slideInRight {
-  animation-name: slideInRight;
-  animation-duration: 0.5s;
-}
-
 @keyframes slideOutRight {
   from {
     transform: translate3d(0, 0, 0);
@@ -29,11 +20,6 @@
     visibility: hidden;
     transform: translate3d(100%, 0, 0);
   }
-}
-
-.slideOutRight {
-  animation-name: slideOutRight;
-  animation-duration: 0.5s;
 }
 
 @keyframes bounceInUp {
@@ -59,11 +45,6 @@
   }
 }
 
-.bounceInUp {
-  animation-name: bounceInUp;
-  animation-duration: 1s;
-}
-
 @keyframes slideOutDown {
   from {
     transform: translate3d(0, 0, 0);
@@ -74,7 +55,28 @@
   }
 }
 
-.slideOutDown {
-  animation-name: slideOutDown;
-  animation-duration: 1s;
+html.js {
+  .animated {
+    animation-fill-mode: both;
+  }
+
+  .slideInRight {
+    animation-name: slideInRight;
+    animation-duration: 0.5s;
+  }
+
+  .slideOutRight {
+    animation-name: slideOutRight;
+    animation-duration: 0.5s;
+  }
+
+  .bounceInUp {
+    animation-name: bounceInUp;
+    animation-duration: 1s;
+  }
+
+  .slideOutDown {
+    animation-name: slideOutDown;
+    animation-duration: 1s;
+  }
 }

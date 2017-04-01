@@ -183,10 +183,15 @@ body {
       position: absolute;
       top: 0;
       right: 0;
+      display: none;
       padding: rem($small-space);
       text-decoration: none;
       color: $dark-grey;
       line-height: 0.8;
+
+      html.js & {
+        display: block;
+      }
     }
 
     @media (min-width: 1025px) {
@@ -357,9 +362,14 @@ body {
     position: absolute;
     top: rem(12);
     right: rem(12);
+    display: none;
     text-align: center;
     text-decoration: none;
     color: $red;
+
+    html.js & {
+      display: block;
+    }
   }
 
   // Improvements for bigger screens
@@ -414,9 +424,7 @@ body {
   }
 
   // Hide because of infinite scrolling
-  html.js & {
-    display: none;
-  }
+  html.js & { display: none; }
 }
 
 // Keyword highlighting

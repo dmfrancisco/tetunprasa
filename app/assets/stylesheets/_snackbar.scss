@@ -24,9 +24,14 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: rem($gutter/2);
+    display: none;
     text-decoration: none;
     line-height: 0.8;
+    padding: rem($gutter/2);
+
+    html.js & {
+      display: block;
+    }
   }
 
   a {
