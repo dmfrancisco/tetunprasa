@@ -6,3 +6,10 @@
     </div>
   </div>
 <% end %>
+
+<script>
+  // Remove the initial snackbar animation so it doesn't happen again
+  setTimeout(function() {
+    $(".Snackbar-message").removeClass("bounceInUp");
+  }, 1050);
+</script>

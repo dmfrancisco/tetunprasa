@@ -8,3 +8,10 @@
     <%= submit_tag "", class: "Topbar-buka-submit", name: "" %>
   <% end %>
 </div>
+
+<script>
+  $(".Topbar-buka").on("submit", function (e) {
+    e.preventDefault();
+    Turbolinks.visit("<%= root_path %>?buka=" + $(".Topbar-buka-input").val());
+  });
+</script>

@@ -1,5 +1,5 @@
-// Update the side sheet
 <% if related %>
+  // Update the side sheet
   $("#related").html("<%= escape_javascript render('terms', terms: related, use_anchor: false) %>");
   Sheet.show();
 <% elsif params[:page].to_i > 1 %>
