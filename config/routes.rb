@@ -3,7 +3,13 @@ Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
 
-  scope "(:locale)", locale: /pt/ do
+  authenticated do
+    scope "(:locale)", locale: /pt/ do
+      root 'dictionary#index'
+    end
+  end
+
+  unauthenticated do
     root 'dictionary#index'
   end
 end
