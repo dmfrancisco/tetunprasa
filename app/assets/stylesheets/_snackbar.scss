@@ -1,0 +1,35 @@
+.Snackbar {
+  @include no-user-select;
+
+  position: fixed;
+  bottom: rem($gutter/2);
+  left: rem($gutter/2);
+  margin-right: rem($gutter/2);
+  max-width: 100%;
+
+  &-message {
+    position: relative;
+
+    background: $black;
+    color: $white;
+    cursor: pointer;
+    font-size: rem(15);
+    line-height: rem(22);
+    padding: rem(10) rem($gutter*1.5) rem(14) rem($gutter/2);
+    margin-top: rem(4);
+    max-width: rem(430);
+  }
+
+  &-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: rem($gutter/2);
+    text-decoration: none;
+    line-height: 0.8;
+  }
+
+  a {
+    color: inherit;
+  }
+}

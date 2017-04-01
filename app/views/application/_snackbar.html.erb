@@ -1,0 +1,8 @@
+<% if flash.any? %>
+  <div class="Snackbar">
+    <div id="snackbar" class="Snackbar-message animated bounceInUp" data-turbolinks-permanent>
+      <%= link_to "✕", "#", class: "Snackbar-close", data: { close: "", animation: "slideOutDown" } %>
+      <%= flash.first.last %>
+    </div>
+  </div>
+<% end %>

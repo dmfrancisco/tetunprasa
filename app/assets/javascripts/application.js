@@ -37,6 +37,33 @@ $(document).ready(function () {
     $("#promo").hide();
   });
 
+  // Hide an element on click
+  //
+  // Elements with the `data-close` attribute can close a given element.
+  // The element to be closed is specified by the `data-close` attribute.
+  // If no value is specified, the parent will be closed.
+  // An optional `data-animation` class can be passed.
+  // If no value is specified, the element will just be hidden.
+  $(document).on("click", "[data-close]", function (e) {
+    e.preventDefault();
+
+    var $this = $(this);
+    var $element = $($this.data("close") || $this.parent());
+    var animationClass = $this.data("animation");
+
+    if (animationClass) {
+      $element.addClass(animationClass);
+      setTimeout(function () { $element.removeClass(animationClass).hide(); }, 1050);
+    } else {
+      $element.hide();
+    }
+  });
+
+  // Remove the initial snackbar animation so it doesn't happen again
+  setTimeout(function() {
+    $(".Snackbar-message").removeClass("bounceInUp");
+  }, 1050);
+
   // Setup infinite scrolling
   $(window).on("scroll", function () {
     var url = $('.pagination .next a').attr('href');

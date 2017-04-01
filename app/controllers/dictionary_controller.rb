@@ -2,10 +2,16 @@ class DictionaryController < ApplicationController
   helper_method :permitted_params
   helper_method :active_letter
 
+  before_action :beta_notice
+
   def index
     respond_to do |format|
-      format.html { render :index, locals: data }
-      format.js { render :index, locals: data }
+      format.html do
+        render :index, locals: data
+      end
+      format.js do
+        render :index, locals: data
+      end
     end
   end
 
@@ -81,5 +87,12 @@ class DictionaryController < ApplicationController
 
   def clean_search_query(query)
     query.gsub("?", "")
+  end
+
+  def beta_notice
+    if request.format.html? && I18n.locale == :pt
+      flash.now.notice = ("A versão portuguesa está em revisão. &nbsp;É uma tradução automática" +
+        " podendo por isso ter erros ou expressões do português do Brasil.").html_safe
+    end
   end
 end
