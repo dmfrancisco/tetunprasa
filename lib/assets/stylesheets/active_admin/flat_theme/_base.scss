@@ -12,18 +12,38 @@ body.active_admin {
     @include flat;
     padding-top: 3px;
     padding-bottom: 7px;
+    background: $header-color;
 
     h1.site_title {
       padding-right: 20px;
     }
     h1.site_title, a, a:link {
       font-family: $font-family;
-      color: $lighter-color;
-      font-weight: bold;
+      color: #000;
+      font-weight: normal;
+      font-size: 15px;
     }
-    ul#tabs > li a {
-      padding-bottom: 6px;
-      @include rounded(20px);
+    h1 img {
+      top: auto;
+      bottom: -10px;
+      margin-top: -16px;
+    }
+    ul.tabs > li {
+      margin-top: 2px;
+      margin-bottom: 2px;
+      a {
+        padding-top: 3px;
+        @include rounded(20px);
+      }
+      &:hover > a {
+        background: darken($header-color, 14%);
+        color: #000;
+      }
+      &.current > a {
+        font-weight: bold;
+        background: darken($header-color, 14%);
+        color: #000;
+      }
     }
     ul#utility_nav {
       padding-right: $horizontal-page-margin;
@@ -46,10 +66,10 @@ body.active_admin {
     // Buttons that are displayed on the right side
     .action_item a {
       font-family: $font-family;
-      background: $vibrant-color;
+      background: $primary-button-color;
       color: #fff;
-      border-top: 2px solid $vibrant-color;
-      border-bottom: 2px solid $link-color;
+      border-top: 2px solid $primary-button-color;
+      border-bottom: 2px solid darken($primary-button-color, 15%);
       padding-top: 9px;
       white-space: nowrap; // Buttons should not have more than one line
 
@@ -60,7 +80,7 @@ body.active_admin {
         &:active {
           margin-top: 2px;
           border-top: none;
-          border-bottom-color: $vibrant-color;
+          border-bottom-color: $primary-button-color;
           color: transparent;
           text-shadow: 0 2px #fff;
         }
@@ -100,7 +120,7 @@ body.active_admin {
     .dropdown_menu_button {
       &, &:not(.disabled):active, &:not(.disabled):hover {
         @include flat;
-        background: $vibrant-color;
+        background: $primary-button-color;
         color: #fff;
       }
       &:after {
@@ -218,8 +238,16 @@ body.active_admin {
       color: #fff;
     }
   }
-  &.logged_out .flash {
-    @include flat;
+  &.logged_out {
+    background: $light-color;
+
+    #content_wrapper #active_admin_content,
+    .flash {
+      @include flat;
+    }
+    h2 {
+      visibility: hidden;
+    }
   }
 
   // Footer

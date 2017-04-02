@@ -5,23 +5,24 @@
 // Active Admin source.
 
 /* New variables */
-$light-color: #e8e9ea !default;
+$light-color: #e6e6e6 !default;
 $lighter-color: lighten($light-color, 5%) !default;
-$vibrant-color: #ee8484 !default;
-$success-color: #34b97b !default;
-$info-color: #5dade2 !default;
+$primary-button-color: #000 !default;
+$success-color: #019263 !default;
+$info-color: #36579d !default;
 $breadcrumb-color: #8a949e !default;
+$header-color: #fec93e !default;
 
 /* Override colors */
-$primary-color: #414649 !default;
+$primary-color: #000 !default;
 $text-color: $primary-color !default;
-$link-color: #9a5959 !default;
+$link-color: #c12436 !default;
 $section-header-text-color: $primary-color !default;
 $current-menu-item-background: lighten($primary-color, 10%) !default;
 $hover-menu-item-background: lighten($primary-color, 10%) !default;
 $table-stripe-color: $lighter-color !default;
 $table-selected-color: #ecf1f5 !default;
-$error-color: #eb2d33 !default;
+$error-color: #c12436 !default;
 $input-border-color: #c9d0d6 !default;
 
 /* Override some gradients */
@@ -29,5 +30,5 @@ $secondary-gradient-start: $light-color !default;
 $secondary-gradient-stop:  $light-color !default;
 
 /* Custom fonts */
-@import url("//fonts.googleapis.com/css?family=Open+Sans:400,600");
-$font-family: "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700,900");
+$font-family: Lato, sans-serif;
