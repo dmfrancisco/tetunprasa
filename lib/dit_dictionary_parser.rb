@@ -241,7 +241,7 @@ class DitDictionaryParser
 
   # Normalizes the `part_of_speech` attribute for consistency and simpler translation
   def self.normalize_part_of_speech(part_of_speech)
-    part_of_speech.chomp('.').split(/[\s;,]/)
+    part_of_speech.chomp('.').split(/[\s;,]/).reject(&:blank?)
   end
 
   # Normalizes the `usage` attribute for consistency and simpler translation
