@@ -3,7 +3,7 @@ class Term < ApplicationRecord
   PER_PAGE = 50
 
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :slug_candidates, use: :slugged
 
   has_many :entries
 
@@ -46,5 +46,17 @@ class Term < ApplicationRecord
     boolean :is_subentry do |t|
       t.entries.all? { |e| e.parent_id.present? }
     end
+  end
+
+  private
+
+  def slug_candidates
+    [:name, :name_and_sequence]
+  end
+
+  def name_and_sequence
+    slug = name.to_param
+    sequence = Term.where("slug like '#{slug}--%'").count + 2
+    "#{slug}-#{sequence}"
   end
 end
