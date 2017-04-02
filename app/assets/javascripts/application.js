@@ -74,6 +74,20 @@ $(window).on("scroll", function () {
   }
 });
 
+// Submit search using turbolinks
+// The second listener is used because it seems sometimes using the back button after
+// a couple of searches results in the form not submitting anymore
+function search() {
+  Turbolinks.visit(window.location.pathname + "?buka=" + $(".Topbar-buka-input").val());
+}
+$(document).on("submit", ".Topbar-buka", function (e) {
+  e.preventDefault();
+  search();
+});
+$(document).on("keyup", ".Topbar-buka-input", function (e) {
+  if (e.keyCode == 13) search();
+});
+
 // Application code to be called everytime the body changes
 $(document).on('turbolinks:load', function () {
   // Modern browsers seem to keep the input value when the user hits back
