@@ -1,4 +1,9 @@
 pt:
+  support:
+    array:
+      two_words_connector: " e "
+      last_word_connector: " e "
+
   dictionary:
     index:
       definitions: Definições
