@@ -7,6 +7,10 @@ body.active_admin {
   font-family: $font-family;
   -webkit-font-smoothing: antialiased;
 
+  #main_content {
+    font-size: 14px;
+  }
+
   // Header
   #header {
     @include flat;
@@ -259,5 +263,10 @@ body.active_admin {
     a, a:hover, a:link, a:visited {
       color: $primary-color;
     }
+  }
+
+  // Differentiate disabled inputs
+  [disabled] {
+    background: $lighter-color;
   }
 }

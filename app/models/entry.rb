@@ -9,6 +9,14 @@ class Entry < ApplicationRecord
 
   after_save :reindex_term
 
+  # This temporary callback and scope will help us enhance portuguese translations
+  # by detecting duplicate words resulting from english synonyms. For eg
+  # "tall, high" is translated to "alto, alto" and we want to manually fix that.
+  before_save :check_duplicate_pt_words
+  store_accessor :metadata, :has_duplicate_pt_words, :updated_by
+  scope :with_duplicate_pt_words, -> { where("metadata->>'has_duplicate_pt_words' = ?", 'true') }
+  scope :manually_updated, -> { where("(metadata->>'updated_by') is not null") }
+
   # @return [String] A short ID that can be used in the public UI
   def related_to_ref(type)
     type_index = RELATED_TYPES.index(type)
@@ -64,5 +72,12 @@ class Entry < ApplicationRecord
 
   def reindex_term
     Sunspot.index(term)
+  end
+
+  def check_duplicate_pt_words
+    self.has_duplicate_pt_words = glossary_pt.split(/[^\w']+/)
+      .reject { |w| w.length <= 2 } # Ignore words with less than 2 characters
+      .group_by(&:to_s).map { |w| w[1].length } # Count occurrences
+      .max.to_i > 2 if glossary_pt.present? # Check if at least one word is repeated
   end
 end

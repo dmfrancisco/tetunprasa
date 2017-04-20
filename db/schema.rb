@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331213603) do
+ActiveRecord::Schema.define(version: 20170416135653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20170331213603) do
     t.text    "info_pt"
     t.string  "usage",              default: [], null: false, array: true
     t.string  "part_of_speech",     default: [], null: false, array: true
+    t.jsonb   "metadata",           default: {}, null: false
     t.index ["parent_id"], name: "index_entries_on_parent_id", using: :btree
     t.index ["pid"], name: "index_entries_on_pid", unique: true, using: :btree
     t.index ["term_id"], name: "index_entries_on_term_id", using: :btree
