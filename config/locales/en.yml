@@ -18,7 +18,9 @@ en:
       attribution_html: >
         Dictionary definitions and examples produced by Catharina Williams-van Klinken
         and others from <strong>Dili Institute of Technology’s Language Centre</strong>.
-      disclaimer_html: This page is not affiliated with the Dili Institute of Technology.
+      disclaimer_html: >
+        This page is not affiliated with the Dili Institute of Technology.
+        Project kindly sponsored by DigitalOcean.
 
   activerecord:
     attributes:
