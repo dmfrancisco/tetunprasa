@@ -1,4 +1,4 @@
-[![tetunprasa.david.tools](https://tetunprasa.david.tools/logo.svg)](https://tetunprasa.david.tools)
+[![tetunprasa.david.tools](./public/logo.svg)](https://tetunprasa.david.tools)
 
 ## Importing and translating the data
 
